@@ -9,22 +9,22 @@
                     <h5>Links</h5>
                     <ul>
                         <li>
-                            <a href="about.php">About</a>
+                            <a href="<?php echo APPURL; ?>/about.php">About</a>
                         </li>
                         <li>
-                            <a href="contact.php">Contact Us</a>
+                            <a href="<?php echo APPURL; ?>/contact.php">Contact Us</a>
                         </li>
                         <li>
-                            <a href="faq.php">FAQ</a>
+                            <a href="<?php echo APPURL; ?>/faq.php">FAQ</a>
                         </li>
                         <li>
                             <a href="javascript:void(0)">How it Works</a>
                         </li>
                         <li>
-                            <a href="terms.php">Terms</a>
+                            <a href="<?php echo APPURL; ?>/terms.php">Terms</a>
                         </li>
                         <li>
-                            <a href="privacy.php">Privacy Policy</a>
+                            <a href="<?php echo APPURL; ?>/privacy.php">Privacy Policy</a>
                         </li>
                     </ul>
                 </div>

@@ -1,10 +1,10 @@
 CREATE TABLE users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
     user_fullname VARCHAR(200),
     user_email VARCHAR(200) UNIQUE,
     username VARCHAR(200) UNIQUE,
-    user_password VARCHAR(200),
     user_image VARCHAR(200),
+    user_password VARCHAR(200),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

@@ -3,7 +3,7 @@
     function username_exists($username)
     {
         global $conn;
-        $insert = $conn->prepare("SELECT * FROM users WHERE username = '$username'");
+        $insert = $conn->query("SELECT * FROM users WHERE username = '$username'");
         $insert->execute();
 
         if ($insert->rowCount() > 0) {
@@ -17,7 +17,7 @@
     function email_exists($email)
     {
         global $conn;
-        $insert = $conn->prepare("SELECT * FROM users WHERE user_email = '$email'");
+        $insert = $conn->query("SELECT * FROM users WHERE user_email = '$email'");
         $insert->execute();
 
         if ($insert->rowCount() > 0) {

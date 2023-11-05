@@ -1,6 +1,9 @@
 <?php require_once "../includes/header.php"; ?>
 <?php require_once "../config/config.php"; ?>
 <?php
+if(isset($_SESSION['username'])) {
+    echo "<script>window.location.href='" . APPURL . "'</script>";
+} else {
     if (isset($_POST['submit'])) {
         // avoiding empty fields
         if (empty($_POST['user_fullname']) OR empty($_POST['user_email']) OR empty($_POST['username']) OR empty($_POST['user_password'])) {
@@ -17,11 +20,13 @@
 
                 if (username_exists($username) OR email_exists($user_email)) {
                     echo "<script>alert('username or email already exist')</script>";
+
                 } else {
                     // connection to DB
-                    $insert = $conn->prepare("INSERT INTO users(user_fullname, user_email, username, user_password, user_image)#
+                    $insert = $conn->prepare("INSERT INTO users(user_fullname, user_email, username, user_image, user_password)
                     VALUES (:user_fullname, :user_email, :username, :user_image, :user_password)");
                    
+                   // Sending query
                    $insert->execute([
                         ":user_fullname" => $user_fullname,
                         ":user_email" => $user_email,
@@ -29,14 +34,15 @@
                         ":user_image" => $user_image,
                         ":user_password" => password_hash($user_password, PASSWORD_DEFAULT)
                    ]);
+                   echo "<script>window.location.href='login.php'</script>";
                 } 
-                // header("location: ".APPURL."/login.php");
                 
             } else {
-                echo "<script>alert('input passwords are different')</script>";
+                echo "<script>alert('password doesnt match')</script>";
             }
         }
     }
+}
 
 ?>
 <div id="page-content" class="page-content">
