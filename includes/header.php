@@ -56,7 +56,7 @@
                         <?php else : ?>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <div class="avatar-header"><img src="<?php echo APPURL;?>/assets/img/logo/avatar.jpg"></div> <?php echo $_SESSION['username']; ?>
+                                <div class="avatar-header"><img src="<?php echo APPURL;?>/assets/img/<?php echo $_SESSION['user_image'] ?>"></div> <?php echo $_SESSION['username']; ?>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="<?php echo APPURL; ?>/transaction.php">Transactions History</a>

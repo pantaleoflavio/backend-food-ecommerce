@@ -8,3 +8,41 @@ CREATE TABLE users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE categories (
+    category_id INT AUTO_INCREMENT PRIMARY KEY,
+    category_name VARCHAR(200),
+    category_image VARCHAR(200),
+    category_description VARCHAR(200),
+    category_icon VARCHAR(200),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO `categories`(`category_name`, `category_image`, `category_description`, `category_icon`)
+VALUES
+('vegetables','vegetables.jpg','Freshly Harvested Veggies From Local Growers','bistro-carrot'),
+('meats','meats.jpg','Protein Rich Ingridients From Local Farmers','bistro-roast-leg'),
+('fruits','fruits.jpg','Variety of Fruits From Local Growers','bistro-apple'),
+('Frozen Foods','frozen.jpg','Protein Rich Ingridients From Local Farmers','bistro-french-fries'),
+('Packages','packages.jpg','Protein Rich Ingridients From Local Farmers','bistro-appetizer'),
+('Fishes','fish.jpg','Protein Rich Ingridients From Local Farmers','bistro-fish-1')
+
+CREATE TABLE products (
+    product_id INT AUTO_INCREMENT PRIMARY KEY,
+    product_title VARCHAR(200),
+    product_description TEXT,
+    product_image VARCHAR(200),
+    product_price DECIMAL(10,2),
+    product_quantity INT DEFAULT 1,
+    exp_date VARCHAR(200),
+    category_id INT(3),
+    status INT DEFAULT 1,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO `products`(`product_title`, `product_description`, `product_image`, `product_price`, `product_quantity`, `exp_date`, `category_id`, `status`) VALUES
+('apple','Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.','apple.jpg','100.00','3','2023','3','1'),
+('beetroot','Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.','beetroot.jpg','20.10','2','2023','1','1'),
+('salmon','Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia des','salmon.jpg','20.23','3','2023','6','1'),
+('meat','Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia des','meats.jpg','101.11','1','2023','2','1'),
+('fries','Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia des','frozen.jpg','5.50','1','2023','4','1'),
+('Package','Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia des','frozen.jpg','5.50','1','2023','5','1')
