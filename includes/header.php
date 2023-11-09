@@ -1,7 +1,16 @@
-<?php require_once "functions.php";?>
 <?php 
     session_start();
     define("APPURL", "http://localhost/freshcery");
+?>
+<?php require_once "functions.php";?>
+<?php //include_once "../config/config.php";?>
+<?php
+//if (isset($_SESSION['user_id'])) {
+    //$query = $conn->prepare("SELECT * FROM cart WHERE user_id = {$_SESSION['user_id']}");
+    //$query->execute();
+    //$cart = $query->fetchAll(PDO::FETCH_ASSOC);
+//}
+
 ?>
 
 <!DOCTYPE html>
@@ -65,8 +74,8 @@
                             </div>
                           </li>
                         <li class="nav-item">
-                            <a href="cart.php" class="nav-link" data-toggle="" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-shopping-basket"></i> <span class="badge badge-primary">5</span>
+                            <a href="<?php echo APPURL; ?>/products/cart.php" class="nav-link" data-toggle="" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-shopping-basket"></i> <span class="badge badge-primary"><?php //echo count($cart); ?></span>
                             </a>
                         </li>
                         <!-- END if condition -->
