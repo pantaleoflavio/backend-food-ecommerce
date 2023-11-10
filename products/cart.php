@@ -9,11 +9,6 @@ if (isset($_SESSION['user_id'])) {
     $cart = $conn->query("SELECT * FROM cart WHERE user_id = {$_SESSION['user_id']}");
     $cart->execute();
     $cartProducts = $cart->fetchAll(PDO::FETCH_OBJ);
-
-    if (isset($_GET['update'])) {
-        # code...
-    }
-
     
 } else {
     echo "<script>window.location.href='".APPURL."'</script>";
@@ -64,16 +59,16 @@ if (isset($_SESSION['user_id'])) {
                                                 <?php echo $cartProduct->pro_title; ?><br>
                                             </td>
                                             <td>
-                                                € <?php echo $cartProduct->pro_price; ?>
+                                                <input disabled class="pro_price" type="number" name="pro_price" value="<?php echo $cartProduct->pro_price; ?>"> €
                                             </td>
                                             <td>
-                                                <input class="form-control" type="number" min="1" data-bts-button-down-class="btn btn-primary" data-bts-button-up-class="btn btn-primary" value="<?php echo $cartProduct->pro_qty; ?>" name="vertical-spin">
+                                                <input class="pro_qty form-control" type="number" min="1" data-bts-button-down-class="btn btn-primary" data-bts-button-up-class="btn btn-primary" value="<?php echo $cartProduct->pro_qty; ?>" name="vertical-spin">
                                             </td>
                                             <td>
-                                                <a href="<?php echo APPURL."products/cart.php&update" ?>" class="btn btn-primary">UPDATE</a>
+                                                <button value="<?php echo $cartProduct->cart_id; ?>" class="btn btn-primary btn-update">UPDATE</button>
                                             </td>
-                                            <td>
-                                                € <?php echo ($cartProduct->pro_price * $cartProduct->pro_qty); ?>
+                                            <td class="total_price">
+                                                <?php echo ($cartProduct->pro_price * $cartProduct->pro_qty); ?> €
                                             </td>
                                             <td>
                                                 <a href="javasript:void" class="text-danger"><i class="fa fa-times"></i></a>
@@ -96,10 +91,16 @@ if (isset($_SESSION['user_id'])) {
                     <div class="col text-right">
                         <div class="clearfix"></div>
                         <?php if(count($cartProducts) > 0) : ?>
-                    
-                        <h6 class="mt-3">Total: € <?php //echo sum($cartProducts-) ?></h6>
+                            <?php
+                                $cartSubtot = array();
+                                foreach ($cartProducts as $cartProduct) {
+                                    $singleSubtot = $cartProduct->pro_qty * $cartProduct->pro_price;
+                                    $cartSubtot[] = $singleSubtot; 
+                            ?>
+                            <?php } ?>
+                            <h6 class="mt-3">Total: € <?php echo array_sum($cartSubtot) ?></h6>
                         <?php else : ?>
-                        <h6 class="mt-3">Total: € 0</h6>
+                            <h6 class="mt-3">Total: € 0</h6>
                         <?php endif; ?>
                         <a href="checkout.html" class="btn btn-lg btn-primary">Checkout <i class="fa fa-long-arrow-right"></i></a>
                     </div>
@@ -117,6 +118,56 @@ if (isset($_SESSION['user_id'])) {
             value = value.replace(/^(0*)/,"");
             $(this).val(1);
         });
+
+        $(".pro_qty").mouseup(function () {
+                  
+            var $el = $(this).closest('tr');
+
+            var pro_qty = $el.find(".pro_qty").val();
+            var pro_price = $el.find(".pro_price").val();
+
+            console.log(pro_qty);
+            console.log(pro_price);
+
+            var total = pro_qty * pro_price;
+
+            $el.find(".total_price").html("");        
+
+            $el.find(".total_price").append(`${total.toFixed(2)} €`);
+        
+        
+            let ajax = false;
+            $(".btn-update").on('click', function(e) {
+                if (!ajax) {
+                    ajax = true;
+                
+
+
+                    var id = $(this).val();
+                
+
+                    $.ajax({
+                    type: "POST",
+                    url: "update-product.php",
+                    data: {
+                        update: "update",
+                        id: id,
+                        pro_qty: pro_qty
+                    },
+
+                    success: function() {
+                        ajax = false;
+                        //alert("done");
+                        window.location.reload();
+                    }
+                    })
+                }
+            });
+        });
+        
+            
+        // fetch();     
+        
 
     })
 </script>
