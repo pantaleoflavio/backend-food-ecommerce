@@ -3,13 +3,15 @@
     define("APPURL", "http://localhost/freshcery");
 ?>
 <?php require_once "functions.php";?>
-<?php //include_once "../config/config.php";?>
+<?php require_once __DIR__ . '/../config/config.php'; ?>
 <?php
-//if (isset($_SESSION['user_id'])) {
-    //$query = $conn->prepare("SELECT * FROM cart WHERE user_id = {$_SESSION['user_id']}");
-    //$query->execute();
-    //$cart = $query->fetchAll(PDO::FETCH_ASSOC);
-//}
+    //Update number of products on screen
+    if (isset($_SESSION['user_id'])) {
+        $query = $conn->prepare("SELECT * FROM cart WHERE user_id = {$_SESSION['user_id']}");
+        $query->execute();
+        $cartProducts = $query->fetchAll(PDO::FETCH_OBJ);
+
+    }
 
 ?>
 
@@ -54,7 +56,8 @@
                         <li class="nav-item">
                             <a href="<?php echo APPURL; ?>/shop.php" class="nav-link">Shop</a>
                         </li>
-                        <!-- PHP session validation with if condition -->
+
+                        <!-- Session validation with if condition -->
                         <?php if(!isset($_SESSION['username'])) : ?>
                         <li class="nav-item">
                             <a href="<?php echo APPURL; ?>/auth/register.php" class="nav-link">Register</a>
@@ -62,6 +65,8 @@
                         <li class="nav-item">
                             <a href="<?php echo APPURL; ?>/auth/login.php" class="nav-link">Login</a>
                         </li>
+
+                        <!-- Session validation else condition -->
                         <?php else : ?>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -72,13 +77,67 @@
                                 <a class="dropdown-item" href="<?php echo APPURL; ?>/setting.php">Settings</a>
                                 <a class="dropdown-item" href="<?php echo APPURL;?>/auth/logout.php">log out</a>
                             </div>
-                          </li>
-                        <li class="nav-item">
-                            <a href="<?php echo APPURL; ?>/products/cart.php" class="nav-link" data-toggle="" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-shopping-basket"></i> <span class="badge badge-primary"><?php //echo count($cart); ?></span>
-                            </a>
                         </li>
-                        <!-- END if condition -->
+                        
+                        <li class="nav-item dropdown">
+                        <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-shopping-basket"></i> <span class="badge badge-primary"><?php echo count($cartProducts); ?></span>
+                            </a>
+                            <div class="dropdown-menu shopping-cart">
+                        
+                                <ul>
+                                    <li>
+                                        <div class="drop-title">Your Cart</div>
+                                    </li>
+
+                                    <!-- Cart empty/not validation if condition -->
+                                    <?php if(count($cartProducts) > 0) : ?>
+                                    <li>
+                                        <div class="shopping-cart-list">
+                                            <?php foreach($cartProducts as $cartProduct) : ?>
+                                                <div class="media">
+                                                    <img class="d-flex mr-3" src="<?php echo APPURL; ?>/assets/img/<?php echo $cartProduct->pro_image; ?>" width="60">
+                                                    <div class="media-body">
+                                                        <h5><a href="<?php echo APPURL ?>/products/detail-product.php?id=<?php echo $cartProduct->pro_id; ?>"><?php echo $cartProduct->pro_title; ?></a></h5>
+                                                        <p class="price">
+                                                            <span>€ <?php echo $cartProduct->pro_price; ?></span>
+                                                        </p>
+                                                        <p class="text-muted">Qty: <?php echo $cartProduct->pro_qty; ?></p>
+                                                    </div>
+                                                </div>
+                                            <?php endforeach; ?>
+                                            
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="drop-title d-flex justify-content-between">
+                                            <span>Total:</span>
+                                                <?php
+                                                    $cartSubtot = array();
+                                                    foreach ($cartProducts as $cartProduct) {
+                                                        $singleSubtot = $cartProduct->pro_qty * $cartProduct->pro_price;
+                                                        $cartSubtot[] = $singleSubtot;
+                                                    } 
+                                                ?>
+                                            <span class="text-primary"><strong>€ <?php echo array_sum($cartSubtot) ?></strong></span>
+                                        </div>
+                                    </li>
+                                    <!-- Cart empty/not validation else condition -->
+                                    <?php else : ?>
+                                        <li>
+                                        <div class="drop-title">Is Empty</div>
+                                        </li>
+                                    <!-- END if condition CART EMPTY -->
+                                    <?php endif; ?>
+                                    <li class="d-flex justify-content-between pl-3 pr-3 pt-3">
+                                        <a href="<?php echo APPURL; ?>/products/cart.php" class="btn btn-default">View Cart</a>
+                                        <a href="<?php echo APPURL; ?>/checkout.php" class="btn btn-primary">Checkout</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <!-- END if condition USER SESSION -->
                         <?php endif; ?>
                     </ul>
                 </div>

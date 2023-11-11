@@ -1,5 +1,4 @@
 <?php require_once "../includes/header.php"; ?>
-<?php require_once "../config/config.php";?>
 <?php
 
 // QUERY for to insert in cart table the customners products 
@@ -93,8 +92,16 @@ if(isset($_GET['id'])) {
                                     
                                 </p>
                             </div>
-                           
                         </div>
+                        <!-- IF SESSION USER VALIDATION -->
+                        <?php if(!isset($_SESSION['user_id'])) : ?>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    PLEASE FIRST <a href="<?php echo APPURL; ?>/auth/register.php" class="nav-link">SIGN UP</a> or <a href="<?php echo APPURL; ?>/auth/login.php" class="nav-link">SIGN IN</a>
+                                </div>
+                            </div>
+
+                        <?php else : ?>
                         <p class="mb-1">
                             <strong>Quantity</strong>
                         </p>
@@ -121,12 +128,13 @@ if(isset($_GET['id'])) {
                                     <input class="form-control" type="hidden" name="pro_price" value="<?php echo $product->product_price; ?>">
                                 </div>
                             </div>
+                            
                             <div class="row">
                                 <div class="col-sm-5">
                                     <input class="form-control" type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
                                 </div>
                             </div>
-
+                    
                             <div class="row">
                                 <div class="col-sm-5">
                                     <input class="form-control" type="number" min="1" data-bts-button-down-class="btn btn-primary" data-bts-button-up-class="btn btn-primary" value="<?php echo $product->product_quantity; ?>" name="pro_qty">
@@ -142,6 +150,9 @@ if(isset($_GET['id'])) {
                                 <i class="fa fa-shopping-basket"></i> Add to Cart
                             </button>
                             <?php endif; ?>
+
+                        <!-- END IF SESSION USER VALIDATION -->
+                        <?php endif; ?>
                         </form>
                     </div>
                 </div>
@@ -222,6 +233,7 @@ if(isset($_GET['id'])) {
 
                     success: function () {
                         alert("Product added succesfully");
+                        window.location.reload();
                         $('#add-to-cart').html("<i class='fa fa-shopping-basket'></i> Added to Cart").prop("disabled", true);
                     },
                     error: function () {

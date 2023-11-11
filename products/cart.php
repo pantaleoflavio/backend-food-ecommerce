@@ -1,9 +1,6 @@
 <?php require_once "../includes/header.php"; ?>
 <?php require_once "../config/config.php"; ?>
 <?php
-if(!isset($_SESSION['user_id'])) {
-    echo "<script>window.location.href='".APPURL."'</script>";
-}
 
 if (isset($_SESSION['user_id'])) {
     $cart = $conn->query("SELECT * FROM cart WHERE user_id = {$_SESSION['user_id']}");
@@ -71,7 +68,7 @@ if (isset($_SESSION['user_id'])) {
                                                 <?php echo ($cartProduct->pro_price * $cartProduct->pro_qty); ?> €
                                             </td>
                                             <td>
-                                                <a href="javasript:void" class="text-danger"><i class="fa fa-times"></i></a>
+                                                <button value="<?php echo $cartProduct->cart_id; ?>" class="btn-delete btn btn-primary">X</button>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -95,14 +92,14 @@ if (isset($_SESSION['user_id'])) {
                                 $cartSubtot = array();
                                 foreach ($cartProducts as $cartProduct) {
                                     $singleSubtot = $cartProduct->pro_qty * $cartProduct->pro_price;
-                                    $cartSubtot[] = $singleSubtot; 
+                                    $cartSubtot[] = $singleSubtot;
+                                }
                             ?>
-                            <?php } ?>
                             <h6 class="mt-3">Total: € <?php echo array_sum($cartSubtot) ?></h6>
                         <?php else : ?>
                             <h6 class="mt-3">Total: € 0</h6>
                         <?php endif; ?>
-                        <a href="checkout.html" class="btn btn-lg btn-primary">Checkout <i class="fa fa-long-arrow-right"></i></a>
+                        <a href="<?php echo APPURL; ?>/checkout.php" class="btn btn-lg btn-primary">Checkout <i class="fa fa-long-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -119,33 +116,26 @@ if (isset($_SESSION['user_id'])) {
             $(this).val(1);
         });
 
+        // Event changing quantity and total price pro product on display
         $(".pro_qty").mouseup(function () {
                   
             var $el = $(this).closest('tr');
 
             var pro_qty = $el.find(".pro_qty").val();
             var pro_price = $el.find(".pro_price").val();
-
-            console.log(pro_qty);
-            console.log(pro_price);
-
             var total = pro_qty * pro_price;
 
             $el.find(".total_price").html("");        
-
             $el.find(".total_price").append(`${total.toFixed(2)} €`);
         
-        
+            // Ajax that send post request for to update on DB the datas
             let ajax = false;
             $(".btn-update").on('click', function(e) {
                 if (!ajax) {
                     ajax = true;
                 
-
-
                     var id = $(this).val();
                 
-
                     $.ajax({
                     type: "POST",
                     url: "update-product.php",
@@ -163,11 +153,30 @@ if (isset($_SESSION['user_id'])) {
                     })
                 }
             });
-        });
-        
-            
-        // fetch();     
-        
 
-    })
+            
+        });
+
+        // Ajax that send post request for to delete on DB the product
+        $(".btn-delete").on('click', function(e) {
+            
+            var id = $(this).val();
+        
+            $.ajax({
+            type: "POST",
+            url: "delete-product.php",
+            data: {
+                delete: "delete",
+                id: id,
+            },
+
+            success: function() {
+                ajax = false;
+                alert("Product deleted");
+                window.location.reload();
+            }
+            })
+        });     
+
+    });
 </script>

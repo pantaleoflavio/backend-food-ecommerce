@@ -1,5 +1,5 @@
 <?php require_once "includes/header.php"; ?>
-<?php require_once "config/config.php"; ?>
+
 <?php
     // Categories
     $categories = $conn->query("SELECT * FROM categories");
