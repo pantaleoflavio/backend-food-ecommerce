@@ -58,3 +58,20 @@ CREATE TABLE cart (
     user_id INT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE bills (
+    bill_id INT AUTO_INCREMENT PRIMARY KEY,
+    fullname VARCHAR(200),
+    company VARCHAR(200),
+    city VARCHAR(200),
+    country VARCHAR(200),
+    adresse VARCHAR(200),
+    zip INT (5),
+    email VARCHAR(200),
+    phone INT (20),
+    order_notes TEXT,
+    user_id INT,
+    total DECIMAL(10,2),
+    product_list TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
