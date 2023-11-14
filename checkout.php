@@ -1,6 +1,12 @@
 <?php require_once "includes/header.php"; ?>
 <?php
 
+if(!isset($_SESSION['user_id'])) {
+                
+    echo "<script> window.location.href='".APPURL."'; </script>";
+
+}
+
 if (isset($_SESSION['user_id'])) {
     $cart = $conn->query("SELECT * FROM cart WHERE user_id = {$_SESSION['user_id']}");
     $cart->execute();
