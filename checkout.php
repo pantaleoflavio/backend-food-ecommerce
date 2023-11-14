@@ -5,9 +5,17 @@ if (isset($_SESSION['user_id'])) {
     $cart = $conn->query("SELECT * FROM cart WHERE user_id = {$_SESSION['user_id']}");
     $cart->execute();
     $cartProducts = $cart->fetchAll(PDO::FETCH_OBJ);
-    
 
-    if(isset($_POST['submit'])){
+    // Subtot and TOT plus Update total as Session key
+    $cartSubtot = array();
+    foreach ($cartProducts as $cartProduct) {
+        $singleSubtot = $cartProduct->pro_qty * $cartProduct->pro_price;
+        $cartSubtot[] = $singleSubtot;
+    }
+    $mySubTot = floatval(array_sum($cartSubtot));
+
+
+    if(isset($_POST['submit'])) {
         $customer = $_POST['fullname'];
         $company = $_POST['company'];
         $adresse = $_POST['adresse'];
@@ -19,21 +27,14 @@ if (isset($_SESSION['user_id'])) {
         $order_notes = $_POST['order_notes'];
         $user_id = $_SESSION['user_id'];
 
-        if (!isset($_POST['total_bill'])) {
-            $total = "";
+        if (!isset($product_list)) {
+            $product_list = "";
         } else {
-            $total = floatval($_POST['total_bill']);
+            foreach ($cartProducts as $cartProduct) {
+                $product_list .= $cartProduct->pro_title . " €" . $cartProduct->pro_price . " x " . $cartProduct->pro_qty . "<br>";
+            };
         }
 
-
-        
-        foreach ($cartProducts as $cartProduct) {
-            $product_list .= $cartProduct->pro_title. " €" . $cartProduct->pro_price . " x " . $cartProduct->pro_qty . "<br>";
-        };
-
-        
-
-        
 
         $insert = $conn->prepare("INSERT INTO bills(fullname, company, city, country, adresse, zip,email,
         phone, order_notes, user_id, total, product_list) VALUES (:fullname, :company, :city, :country, :adresse, :zip,
@@ -54,10 +55,16 @@ if (isset($_SESSION['user_id'])) {
             ":product_list" => $product_list
         ]);
 
-        echo "<script>alert('done')</script>";
-         
-        
+        // Update total as Session key
+        if (!isset($_SESSION['total_bill'])) {
+            $_SESSION['total_bill'] = $mySubTot + 20;
+        }
+
+        echo "<script>window.location.href='" . APPURL . "/products/pay.php'</script>";
+
+
     }
+
 
     
 } else {
@@ -147,20 +154,11 @@ if (isset($_SESSION['user_id'])) {
                                         </tbody>
                                         <tfooter>
                                             <tr>
-                                            <?php
-                                                $cartSubtot = array();
-                                                foreach ($cartProducts as $cartProduct) {
-                                                    $singleSubtot = $cartProduct->pro_qty * $cartProduct->pro_price;
-                                                    $cartSubtot[] = $singleSubtot;
-                                                }
-                                            ?>
                                                 <td>
                                                     <strong>ORDER SUBTOTAL</strong>
                                                 </td>
                                                 <td class="text-right">
-                                                    € <?php $mySubTot = floatval(array_sum($cartSubtot));
-                                                    echo $mySubTot;
-                                                    ?>
+                                                    € <?php echo $mySubTot;?>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -170,7 +168,7 @@ if (isset($_SESSION['user_id'])) {
                                             <hr>
                                             <tr>
                                                 <td><strong>TOTAL</strong></td>
-                                                <td class="text-right">€ <?php echo $myTot = $mySubTot  + 20; ?>
+                                                <td class="text-right">€ <?php echo $mySubTot + 20; ?>
                                                     <input name="total_bill" class="text-right" type="hidden" value="<?php echo $myTot; ?>">
                                                 </td>
                                             </tr>

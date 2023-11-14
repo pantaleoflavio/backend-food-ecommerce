@@ -97,8 +97,8 @@
                                         <a href="<?php echo APPURL ?>/products/detail-product.php?id=<?php echo $allMostProduct->product_id; ?>"><?php echo $allMostProduct->product_title; ?></a>
                                     </h4>
                                     <div class="card-price">
-                                        <span class="discount">€ <?php echo $allMostProduct->product_price; ?></span>
-                                        <span class="reguler">€ 200.000</span>
+                                        <span class="reguler">€ <?php echo $allMostProduct->product_price; ?></span>
+                                        <span class="discount">€ 200.000</span>
                                     </div>
                                     <a href="<?php echo APPURL ?>/products/detail-product.php?id=<?php echo $allMostProduct->product_id; ?>" class="btn btn-block btn-primary">
                                         Add to Cart
@@ -144,8 +144,8 @@
                                         <a href="<?php echo APPURL ?>/products/detail-product.php?id=<?php echo $allVegetable->product_id; ?>"><?php echo $allVegetable->product_title; ?></a>
                                     </h4>
                                     <div class="card-price">
-                                        <span class="discount">€ <?php echo $allVegetable->product_price; ?></span>
-                                        <span class="reguler">€ 200.000</span>
+                                        <span class="reguler">€ <?php echo $allVegetable->product_price; ?></span>
+                                        <span class="discount">€ 200.000</span>
                                     </div>
                                     <a href="<?php echo APPURL ?>/products/detail-product.php?id=<?php echo $allVegetable->product_id; ?>" class="btn btn-block btn-primary">
                                         Add to Cart
@@ -191,8 +191,8 @@
                                         <a href="<?php echo APPURL ?>/products/detail-product.php?id=<?php echo $allMeat->product_id; ?>"><?php echo $allMeat->product_title; ?></a>
                                     </h4>
                                     <div class="card-price">
-                                        <span class="discount">€ <?php echo $allMeat->product_price; ?></span>
-                                        <span class="reguler">€ 200.000</span>
+                                        <span class="reguler">€ <?php echo $allMeat->product_price; ?></span>
+                                        <span class="discount">€ 200.000</span>
                                     </div>
                                     <a href="<?php echo APPURL ?>/products/detail-product.php?id=<?php echo $allMeat->product_id; ?>" class="btn btn-block btn-primary">
                                         Add to Cart
@@ -239,8 +239,8 @@
                                         <a href="<?php echo APPURL ?>/products/detail-product.php?id=<?php echo $allFish->product_id; ?>"><?php echo $allFish->product_title; ?></a>
                                     </h4>
                                     <div class="card-price">
-                                        <span class="discount">€ <?php echo $allFish->product_price; ?></span>
-                                        <span class="reguler">€ 200.000</span>
+                                        <span class="reguler">€ <?php echo $allFish->product_price; ?></span>
+                                        <span class="discount">€ 200.000</span>
                                     </div>
                                     <a href="<?php echo APPURL ?>/products/detail-product.php?id=<?php echo $allFish->product_id; ?>" class="btn btn-block btn-primary">
                                         Add to Cart
@@ -286,8 +286,8 @@
                                         <a href="<?php echo APPURL ?>/products/detail-product.php?id=<?php echo $allFruit->product_id; ?>"><?php echo $allFruit->product_title; ?></a>
                                     </h4>
                                     <div class="card-price">
-                                        <span class="discount">€ <?php echo $allFruit->product_price; ?></span>
-                                        <span class="reguler">€ 200.000</span>
+                                        <span class="reguler">€ <?php echo $allFruit->product_price; ?></span>
+                                        <span class="discount">€ 200.000</span>
                                     </div>
                                     <a href="<?php echo APPURL ?>/products/detail-product.php?id=<?php echo $allFruit->product_id; ?>" class="btn btn-block btn-primary">
                                         Add to Cart

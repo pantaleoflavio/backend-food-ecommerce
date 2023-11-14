@@ -3,6 +3,15 @@
 <?php
 
 if (isset($_SESSION['user_id'])) {
+    // find out total of cart with a foreach
+    $cartSubtot = array();
+    foreach ($cartProducts as $cartProduct) {
+        $singleSubtot = $cartProduct->pro_qty * $cartProduct->pro_price;
+        $cartSubtot[] = $singleSubtot;
+    }
+
+    $totalCart = array_sum($cartSubtot);
+
     $cart = $conn->query("SELECT * FROM cart WHERE user_id = {$_SESSION['user_id']}");
     $cart->execute();
     $cartProducts = $cart->fetchAll(PDO::FETCH_OBJ);
@@ -88,14 +97,7 @@ if (isset($_SESSION['user_id'])) {
                     <div class="col text-right">
                         <div class="clearfix"></div>
                         <?php if(count($cartProducts) > 0) : ?>
-                            <?php
-                                $cartSubtot = array();
-                                foreach ($cartProducts as $cartProduct) {
-                                    $singleSubtot = $cartProduct->pro_qty * $cartProduct->pro_price;
-                                    $cartSubtot[] = $singleSubtot;
-                                }
-                            ?>
-                            <h6 class="mt-3">Total: € <?php echo array_sum($cartSubtot) ?></h6>
+                            <h6 class="mt-3">Total: € <?php echo $totalCart ?></h6>
                         <?php else : ?>
                             <h6 class="mt-3">Total: € 0</h6>
                         <?php endif; ?>
