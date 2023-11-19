@@ -98,10 +98,11 @@ if (isset($_SESSION['user_id'])) {
                         <div class="clearfix"></div>
                         <?php if(count($cartProducts) > 0) : ?>
                             <h6 class="mt-3">Total: € <?php echo $totalCart ?></h6>
+                            <a href="<?php echo APPURL; ?>/checkout.php" class="btn btn-lg btn-primary">Checkout <i class="fa fa-long-arrow-right"></i></a>
                         <?php else : ?>
                             <h6 class="mt-3">Total: € 0</h6>
+                            <button class="btn btn-lg btn-primary" disabled> Cart is empty <i class="fa fa-long-arrow-right"></i></button>
                         <?php endif; ?>
-                        <a href="<?php echo APPURL; ?>/checkout.php" class="btn btn-lg btn-primary">Checkout <i class="fa fa-long-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
