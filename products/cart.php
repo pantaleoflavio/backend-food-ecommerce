@@ -85,8 +85,8 @@ if (isset($_SESSION['user_id'])) {
                                     <tr class="text-center bg-success">>
                                         <td colspan="7">THE CART IS EMPTY</td>
                                     </tr>
-                                </tbody>
                                 <?php endif; ?>
+                                </tbody>
                             </table>
                         </div>
                     </div>

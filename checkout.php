@@ -33,14 +33,12 @@ if (isset($_SESSION['user_id'])) {
         $order_notes = $_POST['order_notes'];
         $user_id = $_SESSION['user_id'];
 
-        if (!isset($product_list)) {
-            $product_list = "";
-        } else {
-            foreach ($cartProducts as $cartProduct) {
-                $product_list .= $cartProduct->pro_title . " €" . $cartProduct->pro_price . " x " . $cartProduct->pro_qty . "<br>";
-            };
-        }
 
+        $product_list = "";
+        foreach ($cartProducts as $cartProduct) {
+            $product_list .= $cartProduct->pro_title . " €" . $cartProduct->pro_price . " x " . $cartProduct->pro_qty . "<br>";
+        };
+        
 
         $insert = $conn->prepare("INSERT INTO bills(fullname, company, city, country, adresse, zip,email,
         phone, order_notes, user_id, total, product_list) VALUES (:fullname, :company, :city, :country, :adresse, :zip,

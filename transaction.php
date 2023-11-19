@@ -1,5 +1,29 @@
 <?php require_once "includes/header.php"; ?>
 <?php require_once "config/config.php"; ?>
+<?php 
+
+    if(!isset($_SERVER['HTTP_REFERER'])){
+        // redirect them to your desired location
+        header('location: http://localhost/freshcery/index.php');
+        exit;
+    }
+
+    if(!isset($_SESSION['user_id'])) {
+                
+        echo "<script> window.location.href='".APPURL."'; </script>";
+
+    }
+
+if (isset($_SESSION['user_id'])) {
+    $user = $_SESSION['user_id'];
+    $bill = $conn->query("SELECT * FROM bills WHERE user_id = '{$user}'");
+    $bill->execute();
+    $billDetails = $bill->fetchAll(PDO::FETCH_OBJ);
+
+
+}
+
+?>
 
     <div id="page-content" class="page-content">
         <div class="banner">
@@ -26,28 +50,41 @@
                                         <th width="5%"></th>
                                         <th>Invoice</th>
                                         <th>Date</th>
+                                        <th>Products</th>
                                         <th>Total</th>
                                         <th>Status</th>
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                <?php if(count($billDetails) > 0) : ?>
+                                    <?php foreach($billDetails as $billDetail) : ?>
                                     <tr>
                                         <td>1</td>
                                         <td>
                                             AL121N8H2XQB47
                                         </td>
                                         <td>
-                                            12-12-2017
+                                            <?php echo $billDetail->created_at; ?>
+                                        </td>
+
+                                        <td>
+                                            <?php echo $billDetail->product_list; ?>
                                         </td>
                                         <td>
-                                            Rp 200.000
+                                            <?php echo $billDetail->total; ?>
                                         </td>
                                         <td>
                                             Delivered
                                         </td>
                                         
                                     </tr>
+                                    <?php endforeach; ?>
+                                <?php else : ?>
+                                    <tr class="text-center bg-success">>
+                                        <td colspan="6">No Bills</td>
+                                    </tr>
+                                <?php endif; ?>
                                 </tbody>
                             </table>
                         </div>
