@@ -26,7 +26,6 @@ if(isset($_SESSION['username'])) {
                     $_SESSION['user_fullname'] = $fetch['user_fullname'];
                     $_SESSION['user_email'] = $fetch['user_email'];
                     $_SESSION['username'] = $fetch['username'];
-                    $_SESSION['user_image'] = $fetch['user_image'];
                     echo "<script>window.location.href='" . APPURL . "'</script>";
                 } else {
                     echo "<script>alert('email or password is wrong')</script>";

@@ -1,12 +1,6 @@
 <?php require_once "includes/header.php"; ?>
 <?php
 
-if(!isset($_SESSION['user_id'])) {
-                
-    echo "<script> window.location.href='".APPURL."'; </script>";
-
-}
-
 if (isset($_SESSION['user_id'])) {
     $cart = $conn->query("SELECT * FROM cart WHERE user_id = {$_SESSION['user_id']}");
     $cart->execute();
@@ -22,6 +16,7 @@ if (isset($_SESSION['user_id'])) {
     $mySubTot = floatval(array_sum($cartSubtot));
 
     if(isset($_POST['submit'])) {
+        $stringRandom = generateStringRandom();
         $customer = $_POST['fullname'];
         $company = $_POST['company'];
         $adresse = $_POST['adresse'];
@@ -40,11 +35,12 @@ if (isset($_SESSION['user_id'])) {
         };
         
 
-        $insert = $conn->prepare("INSERT INTO bills(fullname, company, city, country, adresse, zip,email,
-        phone, order_notes, user_id, total, product_list) VALUES (:fullname, :company, :city, :country, :adresse, :zip,
+        $insert = $conn->prepare("INSERT INTO bills(invoice, fullname, company, city, country, adresse, zip,email,
+        phone, order_notes, user_id, total, product_list) VALUES (:invoice, :fullname, :company, :city, :country, :adresse, :zip,
         :email, :phone, :order_notes, :user_id, :total, :product_list)");
 
         $insert->execute([
+            ":invoice" => $stringRandom,
             ":fullname" => $customer,
             ":company" => $company,
             ":city" => $city,
@@ -65,11 +61,7 @@ if (isset($_SESSION['user_id'])) {
         }
 
         echo "<script>window.location.href='" . APPURL . "/products/pay.php'</script>";
-
-
     }
-
-
     
 } else {
     echo "<script>window.location.href='".APPURL."'</script>";

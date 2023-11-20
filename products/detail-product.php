@@ -45,13 +45,13 @@ if(isset($_GET['id'])) {
             $validate->execute();
         }
 
-
     } else {
-        echo "<script>window.location.href='".APPURL."'</script>";
+        echo "<script>window.location.href='".APPURL."/404.php'</script>";
     }
     
+    // Validation if Product exists
 } else {
-    echo "<script>window.location.href='".APPURL."'</script>";
+    echo "<script>window.location.href='".APPURL."/404.php'</script>";
 }
 
 

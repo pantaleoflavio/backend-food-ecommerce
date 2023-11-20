@@ -7,9 +7,14 @@
 <?php
     //Update number of products on screen
     if (isset($_SESSION['user_id'])) {
-        $query = $conn->prepare("SELECT * FROM cart WHERE user_id = {$_SESSION['user_id']}");
+        $id = $_SESSION['user_id'];
+        $query = $conn->prepare("SELECT * FROM cart WHERE user_id = {$id}");
         $query->execute();
         $cartProducts = $query->fetchAll(PDO::FETCH_OBJ);
+
+        $user = $conn->query("SELECT * FROM users WHERE user_id = '$id'");
+        $user->execute();
+        $userData = $user->fetch(PDO::FETCH_ASSOC);
 
     }
 
@@ -70,11 +75,11 @@
                         <?php else : ?>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <div class="avatar-header"><img src="<?php echo APPURL;?>/assets/img/<?php echo $_SESSION['user_image'] ?>"></div> <?php echo $_SESSION['username']; ?>
+                                <div class="avatar-header"><img src="<?php echo APPURL;?>/assets/img/users/<?php echo $userData['user_image']; ?>"></div> <?php echo $_SESSION['username']; ?>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="<?php echo APPURL; ?>/transaction.php">Transactions History</a>
-                                <a class="dropdown-item" href="<?php echo APPURL; ?>/setting.php">Settings</a>
+                                <a class="dropdown-item" href="<?php echo APPURL; ?>/users/transaction.php?id=<?php echo $_SESSION['user_id']; ?>">Transactions History</a>
+                                <a class="dropdown-item" href="<?php echo APPURL; ?>/users/setting.php?id=<?php echo $_SESSION['user_id']; ?>">Settings</a>
                                 <a class="dropdown-item" href="<?php echo APPURL;?>/auth/logout.php">log out</a>
                             </div>
                         </li>

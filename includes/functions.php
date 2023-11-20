@@ -29,4 +29,15 @@
 
     }
 
+    function generateStringRandom() {
+        // Characters from which to create the random string
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        // Mix the Characters
+        $mixedCharacters = str_shuffle($characters);
+        // Estrai una sottostringa random della lunghezza desiderata
+        $stringRandom = substr($mixedCharacters, 0, 10);
+        return $stringRandom;
+    }
+    
+
 ?>
