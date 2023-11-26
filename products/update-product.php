@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php require_once "../includes/header.php"; ?>
 <?php require_once "../config/config.php"; ?>
 
@@ -12,5 +13,4 @@ if (isset($_POST['update'])) {
 }
 
 ?>
-
 <?php require_once "../includes/footer.php"; ?>

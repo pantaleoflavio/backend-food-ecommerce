@@ -1,3 +1,4 @@
+
 <?php
 
     function username_exists($username)
@@ -39,5 +40,4 @@
         return $stringRandom;
     }
     
-
 ?>
