@@ -5,42 +5,29 @@ if(isset($_SESSION['username'])) {
     echo "<script>window.location.href='" . APPURL . "'</script>";
 } else {
     if (isset($_POST['submit'])) {
-        // avoiding empty fields
-        if (empty($_POST['user_fullname']) OR empty($_POST['user_email']) OR empty($_POST['username']) OR empty($_POST['user_password'])) {
-            echo "<script>alert('one or more inputs are empty')</script>";
-        } else {
-            // avoiding different passwords
-            if ($_POST['user_password'] == $_POST['confirm_password']) {
-                // saving input parameters in variables
-                $user_fullname = $_POST['user_fullname'];
-                $user_email = $_POST['user_email'];
-                $username = $_POST['username'];
-                $user_image = 'user.png';
-                $user_password = $_POST['user_password'];
+        // saving input parameters in variables
+        $user_fullname = $_POST['user_fullname'];
+        $user_email = $_POST['user_email'];
+        $username = $_POST['username'];
+        $user_image = 'user.png';
+        $user_password = $_POST['user_password'];
+        $confirm_password = $_POST['confirm_password'];
 
-                if (username_exists($username) OR email_exists($user_email)) {
-                    echo "<script>alert('username or email already exist')</script>";
+        //Instantiate SignupContr Class
+        include "../classes/db.classes.php";
+        include "../classes/signup.classes.php";
+        include "../classes/signup-contr.classes.php";
+        $signup = new SignupContr($user_fullname, $user_email, $username, $user_image, $user_password, $confirm_password);
 
-                } else {
-                    // connection to DB
-                    $insert = $conn->prepare("INSERT INTO users(user_fullname, user_email, username, user_image, user_password)
-                    VALUES (:user_fullname, :user_email, :username, :user_image, :user_password)");
-                   
-                   // Sending query
-                   $insert->execute([
-                        ":user_fullname" => $user_fullname,
-                        ":user_email" => $user_email,
-                        ":username" => $username,
-                        ":user_image" => $user_image,
-                        ":user_password" => password_hash($user_password, PASSWORD_DEFAULT)
-                   ]);
-                   echo "<script>window.location.href='login.php'</script>";
-                } 
-                
-            } else {
-                echo "<script>alert('password doesnt match')</script>";
-            }
-        }
+        //Running error handlers and user signup
+        $signup->signupUser();
+
+        // Going to back to front page
+        echo "<script>alert('Register successfully
+        ')</script>";
+        header("location: login.php");
+        
+        
     }
 }
 
