@@ -73,7 +73,7 @@ if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $_GET['id']) {
                                     <div>
                                         <label for="immagine">Select a new image:</label>
                                     </div>
-                                    <img src="<?php echo APPURL; ?>/assets/img/users/<?php echo $userData['user_image']; ?>" alt="" id="image" name="image" class="img-size-md">
+                                    <img width="150" src="<?php echo APPURL; ?>/assets/img/users/<?php echo $userData['user_image']; ?>" alt="" id="image" name="image" class="img-size-sm">
                                     <input class="form-control" type="file" id="image" name="image" value="<?php echo $userData['user_image']; ?>">
                                 </div>
                                 <div class="form-group text-right">

@@ -1,14 +1,14 @@
 
 <?php 
     session_start();
-    define("APPURL", "http://localhost/freshcery");
+    define("APPURL", "http://localhost/freshcherry");
 ?>
 <?php require_once __DIR__ . '/../config/config.php'; ?>
 <?php 
 
     if(!isset($_SERVER['HTTP_REFERER'])){
         // redirect them to your desired location
-        header('location: http://localhost/freshcery/index.php');
+        header('location: http://localhost/freshcherry/index.php');
         exit;
     }
 
