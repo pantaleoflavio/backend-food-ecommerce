@@ -26,8 +26,7 @@ if(isset($_SESSION['username'])) {
         echo "<script>alert('Register successfully
         ')</script>";
         header("location: login.php");
-        
-        
+
     }
 }
 

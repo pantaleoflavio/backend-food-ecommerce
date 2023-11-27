@@ -5,35 +5,23 @@ if(isset($_SESSION['username'])) {
     echo "<script>window.location.href='" . APPURL . "'</script>";
 } else {
     if (isset($_POST['submit'])) {
-        // avoiding empty fields
-        if (empty($_POST['email']) or empty($_POST['password'])) {
-            echo "<script>alert('one or more inputs are empty')</script>";
-        } else {
-            $input_email = $_POST['email'];
-            $input_password = $_POST['password'];
 
-            //query
-            $login = $conn->query("SELECT * FROM users WHERE user_email = '$input_email'");
-            $login->execute();
-            $fetch = $login->fetch(PDO::FETCH_ASSOC);
+        $input_email = $_POST['email'];
+        $input_password = $_POST['password'];
 
-            //validate email
-            if ($login->rowCount() > 0) {
-                // validate password
-                if (password_verify($input_password, $fetch['user_password'])) {
+        //Instantiate SignupContr Class
+        include "../classes/db.classes.php";
+        include "../classes/login.classes.php";
+        include "../classes/login-contr.classes.php";
+        $login = new LoginContr($input_email, $input_password);
 
-                    $_SESSION['user_id'] = $fetch['user_id'];
-                    $_SESSION['user_fullname'] = $fetch['user_fullname'];
-                    $_SESSION['user_email'] = $fetch['user_email'];
-                    $_SESSION['username'] = $fetch['username'];
-                    echo "<script>window.location.href='" . APPURL . "'</script>";
-                } else {
-                    echo "<script>alert('email or password is wrong')</script>";
-                }
-            } else {
-                echo "<script>alert('email or password is wrong')</script>";
-            }
-        }
+        //Running error handlers and user signup
+        $login->loginUser();
+
+        // Going to back to front page
+        header("location: ".APPURL);
+
+
     }
 }
 ?>
