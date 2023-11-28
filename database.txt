@@ -81,3 +81,6 @@ CREATE TABLE bills (
 ALTER TABLE bills
 ADD COLUMN invoice VARCHAR(200) AFTER bill_id,
 ADD COLUMN delivery INT(1) DEFAULT 0 AFTER created_at;
+
+ALTER TABLE users
+ADD COLUMN role VARCHAR(255) DEFAULT 'customer' AFTER user_password;

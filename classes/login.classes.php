@@ -44,6 +44,7 @@
                 $_SESSION['user_fullname'] = $user[0]['user_fullname'];
                 $_SESSION['user_email'] = $user[0]['user_email'];
                 $_SESSION['username'] = $user[0]['username'];
+                $_SESSION['role'] = $user[0]['role'];
 
             }
 

@@ -82,6 +82,9 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="<?php echo APPURL; ?>/users/transaction.php?id=<?php echo $_SESSION['user_id']; ?>">Transactions History</a>
                                 <a class="dropdown-item" href="<?php echo APPURL; ?>/users/setting.php?id=<?php echo $_SESSION['user_id']; ?>">Settings</a>
+                                <?php if($_SESSION['role'] === 'admin') : ?>
+                                <a class="dropdown-item" href="<?php echo APPURL; ?>/admin-panel/index.php?id=<?php echo $_SESSION['user_id']; ?>">Admin Panel</a>
+                                <?php endif; ?>
                                 <a class="dropdown-item" href="<?php echo APPURL;?>/auth/logout.php">log out</a>
                             </div>
                         </li>
