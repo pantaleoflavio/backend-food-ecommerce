@@ -1,72 +1,37 @@
 <?php
+
 class Counts extends DB {
 
     public function numberProducts(){
-        $stmt = $this->connect()->prepare("SELECT * FROM products");
-
-        if(!$stmt->execute()){
-            $stmt = null;
-            header("location: ../index.php?error=stmtfailed");
-            exit();
-        }
-
-        $products = $stmt->fetchAll((PDO::FETCH_ASSOC));
-
-        return count($products);
-
+        $stmt = $this->connect()->prepare("SELECT COUNT(*) as count FROM products");
+        return $this->executeAndCount($stmt);
     }
 
     public function numberOrders(){
-        $stmt = $this->connect()->prepare("SELECT * FROM bills");
-
-        if(!$stmt->execute()){
-            $stmt = null;
-            header("location: ../index.php?error=stmtfailed");
-            exit();
-        }
-
-        $orders = $stmt->fetchAll((PDO::FETCH_ASSOC));
-
-        return count($orders);
-
+        $stmt = $this->connect()->prepare("SELECT COUNT(*) as count FROM bills");
+        return $this->executeAndCount($stmt);
     }
 
     public function numberCategories(){
-        $stmt = $this->connect()->prepare("SELECT * FROM categories");
-
-        if(!$stmt->execute()){
-            $stmt = null;
-            header("location: ../index.php?error=stmtfailed");
-            exit();
-        }
-
-        $categories = $stmt->fetchAll((PDO::FETCH_ASSOC));
-
-        return count($categories);
-
+        $stmt = $this->connect()->prepare("SELECT COUNT(*) as count FROM categories");
+        return $this->executeAndCount($stmt);
     }
 
     public function numberUsers(){
-        $stmt = $this->connect()->prepare("SELECT * FROM users");
-
-        if(!$stmt->execute()){
-            $stmt = null;
-            header("location: ../index.php?error=stmtfailed");
-            exit();
-        }
-
-        $users = $stmt->fetchAll((PDO::FETCH_ASSOC));
-
-        return count($users);
-
+        $stmt = $this->connect()->prepare("SELECT COUNT(*) as count FROM users");
+        return $this->executeAndCount($stmt);
     }
 
-
-
-
-
-
+    private function executeAndCount($stmt) {
+        try {
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result['count'];
+        } catch (PDOException $e) {
+            // Registra l'errore o gestiscilo in base alle tue esigenze
+            error_log("Errore nell'esecuzione della query: " . $e->getMessage());
+            return false;
+        }
+    }
 }
-
-
 ?>

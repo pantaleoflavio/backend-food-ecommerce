@@ -1,6 +1,9 @@
 <?php require_once 'includes/header.php'; ?>
 
 <?php
+if($_SESSION['role'] !== 'admin') {
+  header("Location: ". APPURL);
+}
 //Instantiate Counts Class
 include "../classes/db.classes.php";
 include "classes/counts.classes.php";

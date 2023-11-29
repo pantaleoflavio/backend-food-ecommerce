@@ -5,8 +5,13 @@
 ?>
 
 <?php 
-if(!isset($_SESSION['username']) && $_SESSION['role'] !== 'admin') {
-    echo "<script>window.location.href='" . APPURL . "'</script>";
+
+if(!isset($_SESSION['username'])) {
+  header("Location: ". APPURL);
+}
+
+if($_SESSION['role'] !== 'admin') {
+  header("Location: ". APPURL);
 }
 
 ?>
@@ -37,22 +42,17 @@ if(!isset($_SESSION['username']) && $_SESSION['role'] !== 'admin') {
       <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav side-nav" >
           <li class="nav-item">
-            <a class="nav-link text-white" style="margin-left: 20px;" href="index.html">Home
-              <span class="sr-only">(current)</span>
-            </a>
+            <a class="nav-link" href="<?php echo ADMINURL ?>/admins/admins.php" style="margin-left: 20px;">Admins and Users</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="admins/admins.html" style="margin-left: 20px;">Admins</a>
+            <a class="nav-link" href="<?php echo ADMINURL ?>/categories-admins/show-categories.php" style="margin-left: 20px;">Categories</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="categories-admins/show-categories.html" style="margin-left: 20px;">Categories</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="products-admins/show-products.html" style="margin-left: 20px;">Products</a>
+            <a class="nav-link" href="<?php echo ADMINURL ?>/products-admins/show-products.php" style="margin-left: 20px;">Products</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="orders-admins/show-orders.html" style="margin-left: 20px;">Orders</a>
+            <a class="nav-link" href="<?php echo ADMINURL ?>/orders-admins/show-orders.php" style="margin-left: 20px;">Orders</a>
           </li>
         
         </ul>

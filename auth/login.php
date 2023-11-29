@@ -9,7 +9,7 @@ if(isset($_SESSION['username'])) {
         $input_email = $_POST['email'];
         $input_password = $_POST['password'];
 
-        //Instantiate SignupContr Class
+        //Instantiate Login Contr Class
         include "../classes/db.classes.php";
         include "../classes/login.classes.php";
         include "../classes/login-contr.classes.php";
