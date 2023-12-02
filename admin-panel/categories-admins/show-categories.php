@@ -1,5 +1,22 @@
 <?php require_once '../includes/header.php'; ?>
 
+<?php
+if($_SESSION['role'] !== 'admin') {
+  header("Location: ". APPURL);
+}
+
+
+//Instantiate Classes
+include "../../classes/db.classes.php";
+include "../classes/categories.classes.php";
+include "../classes/categories-contr.classes.php";
+$categoriesContr = new CategoriesContr($arg1 = null, $arg2 = null, $arg3 = null, $arg4 = null);
+$categories = $categoriesContr->getCategories();
+
+
+
+?>
+
           <div class="row">
         <div class="col">
           <div class="card">
@@ -11,29 +28,23 @@
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">name</th>
+                    <th scope="col">description</th>
+                    <th scope="col">image</th>
                     <th scope="col">update</th>
                     <th scope="col">delete</th>
                   </tr>
                 </thead>
                 <tbody>
+                <?php foreach($categories as $category) : ?>
                   <tr>
-                    <th scope="row">1</th>
-                    <td>Fruits</td>
-                    <td><a  href="#" class="btn btn-warning text-white text-center ">Update </a></td>
+                    <td scope="row"><?php echo $category->category_id; ?></td>
+                    <td><?php echo $category->category_name; ?></td>
+                    <td><?php echo $category->category_description; ?></td>
+                    <td><img src="<?php echo APPURL?>/assets/img/<?php echo $category->category_image; ?>" class="img-thumbnail" width="70" alt=""></td>
+                    <td><a  href="update-category.php?id=<?php echo $category->category_id; ?>" class="btn btn-warning text-white text-center ">Update </a></td>
                     <td><a href="#" class="btn btn-danger  text-center ">Delete </a></td>
                   </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Meat</td>
-                    <td><a  href="#" class="btn btn-warning text-white text-center">Update </a></td>
-                    <td><a href="#" class="btn btn-danger  text-center ">Delete </a></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>Frozen Food</td>
-                     <td><a  href="#" class="btn btn-warning text-white text-center ">Update </a></td>
-                    <td><a href="#" class="btn btn-danger text-center">Delete </a></td>
-                  </tr>
+                  <?php endforeach; ?>
                 </tbody>
               </table> 
             </div>
