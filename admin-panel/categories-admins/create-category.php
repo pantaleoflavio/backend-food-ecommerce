@@ -1,4 +1,34 @@
 <?php require_once '../includes/header.php'; ?>
+<?php
+if($_SESSION['role'] !== 'admin') {
+  header("Location: ". APPURL);
+}
+
+  //Instantiate Class
+  include "../../classes/db.classes.php";
+  include "../classes/categories.classes.php";
+  include "../classes/categories-contr.classes.php";
+  
+
+
+  if (isset($_POST['create'])) {
+    $cat_name = $_POST['name'];
+    $cat_description = $_POST['description'];
+    $cat_icon = $_POST['icon'];
+    $cat_image = $_FILES['image']['name'];
+    $cat_image_temp = $_FILES['image']['tmp_name'];
+
+    $target_directory = $_SERVER['DOCUMENT_ROOT'] . "/freshcherry/assets/img/";
+    $target_path = $target_directory . $cat_image;
+
+    move_uploaded_file($cat_image_temp, $target_path);
+    $categoriesContr = new CategoriesContr($arg1 = null, $cat_name, $cat_image, $cat_description, $cat_icon);
+    $categoriesContr->createCategory();
+    header("Location: ". ADMINURL. "/categories-admins/show-categories.php");
+  }
+
+
+?>
        <div class="row">
         <div class="col">
           <div class="card">
@@ -10,7 +40,7 @@
                   <input type="text" name="name" id="form2Example1" class="form-control" placeholder="name" />
                 </div>
                 <div class="form-outline mb-4 mt-4">
-                  <input type="text" name="icon" id="form2Example1" class="form-control" placeholder="icon" />      
+                  <input type="text" name="icon" id="form2Example1" class="form-control" placeholder="name of the icon" />      
                 </div>
                 <div class="form-group">
                   <label for="exampleFormControlTextarea1">Description</label>
@@ -24,7 +54,7 @@
 
       
                 <!-- Submit button -->
-                <button type="submit" name="submit" class="btn btn-primary  mb-4 text-center">create</button>
+                <button type="submit" name="create" class="btn btn-primary  mb-4 text-center">create</button>
 
           
               </form>

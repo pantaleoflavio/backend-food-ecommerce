@@ -13,7 +13,7 @@ if (!isset($_GET['id'])) {
   include "../../classes/db.classes.php";
   include "../classes/categories.classes.php";
   include "../classes/categories-contr.classes.php";
-  $categoriesContr = new CategoriesContr($category_id, $arg2 = null, $arg3 = null, $arg4 = null);
+  $categoriesContr = new CategoriesContr($category_id, $arg2 = null, $arg3 = null, $arg4 = null, $arg5 = null);
   $singleCat = $categoriesContr->getSingleCategory();
 
   if (isset($_POST['submit'])) {
@@ -27,8 +27,9 @@ if (!isset($_GET['id'])) {
     move_uploaded_file($cat_image_temp, $target_path);
 
     $cat_description = $_POST['description'];
+    $cat_icon = $_POST['icon'];
 
-    $categoriesContr = new CategoriesContr($category_id, $cat_name, $cat_image, $cat_description);
+    $categoriesContr = new CategoriesContr($category_id, $cat_name, $cat_image, $cat_description, $cat_icon);
     $categoriesContr->updateCategory();
   }
 
@@ -54,9 +55,14 @@ if (!isset($_GET['id'])) {
                 </div>
                 <div class="form-outline mb-4 mt-4">
                   <img width="70" src="<?php echo APPURL; ?>/assets/img/<?php echo $singleCat[0]['category_image']; ?>" alt="" id="image" class="img-size-sm">
-                  <input class="form-control" type="file" id="image" name="image">
+                  <input class="form-control" type="file" value="<?php echo $singleCat[0]['category_image']; ?>" id="image" name="image">
                 </div>
 
+                <div class="form-outline mb-4 mt-4">
+                  <span class="d-flex mr-2"><i class="sb-<?php echo $singleCat[0]['category_icon']; ?>"></i></span>
+                  <input type="text" name="icon" id="icon" value="<?php echo $singleCat[0]['category_icon'];  ?>" class="form-control" placeholder="icon" />
+                 
+                </div>
       
                 <!-- Submit button -->
                 <button type="submit" name="submit" class="btn btn-primary  mb-4 text-center">update</button>
