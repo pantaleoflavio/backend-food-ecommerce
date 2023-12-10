@@ -137,7 +137,7 @@ if(isset($_GET['id'])) {
                     
                             <div class="row">
                                 <div class="col-sm-5">
-                                    <input class="form-control" type="number" min="1" data-bts-button-down-class="btn btn-primary" data-bts-button-up-class="btn btn-primary" value="<?php echo $product->product_quantity; ?>" name="pro_qty">
+                                    <input class="form-control" type="number" min="1" max="<?php echo $product->product_quantity; ?>" data-bts-button-down-class="btn btn-primary" data-bts-button-up-class="btn btn-primary" name="pro_qty">
                                 </div>
                                 <div class="col-sm-6"><span class="pt-1 d-inline-block">Pack (1000 gram)</span></div>
                             </div>
@@ -214,8 +214,18 @@ if(isset($_GET['id'])) {
         $(document).ready(function() {
             $(".form-control").keyup(function(){
                 var value = $(this).val();
+
+                // Remove initial 0
                 value = value.replace(/^(0*)/,"");
-                $(this).val(1);
+
+                // Max Qty of the product
+                var maxQuantity = <?php echo $product->product_quantity; ?>;
+
+                // compare to the max value
+                if (parseInt(value) > maxQuantity) {
+                    // if value overcome max, set to max value
+                    $(this).val(maxQuantity);
+                }
             });
 
             // prevent default 
