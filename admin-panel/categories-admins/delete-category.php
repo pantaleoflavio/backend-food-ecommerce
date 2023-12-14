@@ -2,11 +2,11 @@
 
 <?php
 if($_SESSION['role'] !== 'admin') {
-  header("Location: ". APPURL);
+  header("Location: ../../index.php");
 }
 
 if (!isset($_GET['id'])) {
-  header("Location: ". APPURL);
+  header("Location: ../index.php");
 } else {
   $category_id = $_GET['id'];
   //Instantiate Class
@@ -19,7 +19,7 @@ if (!isset($_GET['id'])) {
   if (isset($_POST['delete'])) {
     
     $categoriesContr->deleteCategory($category_id);
-    header("Location: ". ADMINURL. "/categories-admins/show-categories.php");
+    header("Location: show-categories.php");
   }
 
 }
@@ -43,7 +43,7 @@ if (!isset($_GET['id'])) {
                  
                 </div>
                 <div class="mb-4 mt-4">
-                  <img width="70" src="<?php echo APPURL; ?>/assets/img/<?php echo $singleCat[0]['category_image']; ?>" alt="" id="image" class="img-size-sm">
+                  <img width="70" src="../../assets/img/<?php echo $singleCat[0]['category_image']; ?>" alt="" id="image" class="img-size-sm">
                 </div>
 
       

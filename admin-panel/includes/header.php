@@ -1,18 +1,20 @@
 <?php 
     session_start();
-    define("ADMINURL", "http://localhost/freshcherry/admin-panel");
-    define("APPURL", "http://localhost/freshcherry");
+    define("ADMINURL", $_COOKIE['appleader']."/admin-panel");
+    
 ?>
 
 <?php 
 
 if(!isset($_SESSION['username'])) {
-  header("Location: ". APPURL);
+  header("Location: ../index.php");
 }
 
 if($_SESSION['role'] !== 'admin') {
-  header("Location: ". APPURL);
+  header("Location: ../index.php");
 }
+
+
 
 ?>
 
@@ -33,7 +35,7 @@ if($_SESSION['role'] !== 'admin') {
 <div id="wrapper">
     <nav class="navbar header-top fixed-top navbar-expand-lg  navbar-dark bg-dark">
       <div class="container">
-      <a class="navbar-brand" href="<?php echo APPURL; ?>/index.php">To the E-Commerce</a>
+      <a class="navbar-brand" href="<?php echo $_COOKIE['appleader']; ?>">To the E-Commerce</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText"
         aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -67,12 +69,9 @@ if($_SESSION['role'] !== 'admin') {
               <?php echo $_SESSION['username']; ?>
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="<?php echo APPURL ?>/auth/logout.php">Logout</a>
-              
+              <a class="dropdown-item" href="../../auth/logout.php">Logout</a>
           </li>
-                          
-          
-        </ul>
+        </ul> 
       </div>
     </div>
     </nav>

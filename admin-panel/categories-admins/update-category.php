@@ -2,11 +2,11 @@
 
 <?php
 if($_SESSION['role'] !== 'admin') {
-  header("Location: ". APPURL);
+  header("Location: ../../index.php");
 }
 
 if (!isset($_GET['id'])) {
-  header("Location: ". APPURL);
+  header("Location: ../index.php");
 } else {
   $category_id = $_GET['id'];
   //Instantiate Class
@@ -31,6 +31,7 @@ if (!isset($_GET['id'])) {
 
     $categoriesContr = new CategoriesContr($category_id, $cat_name, $cat_image, $cat_description, $cat_icon);
     $categoriesContr->updateCategory();
+    echo "<script>window.location.href='show-categories.php'</script>";
   }
 
 }
@@ -54,7 +55,7 @@ if (!isset($_GET['id'])) {
                  
                 </div>
                 <div class="form-outline mb-4 mt-4">
-                  <img width="70" src="<?php echo APPURL; ?>/assets/img/<?php echo $singleCat[0]['category_image']; ?>" alt="" id="image" class="img-size-sm">
+                  <img width="70" src="../../assets/img/<?php echo $singleCat[0]['category_image']; ?>" alt="" id="image" class="img-size-sm">
                   <input class="form-control" type="file" value="<?php echo $singleCat[0]['category_image']; ?>" id="image" name="image">
                 </div>
 

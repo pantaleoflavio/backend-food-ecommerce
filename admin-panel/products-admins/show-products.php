@@ -1,7 +1,7 @@
 <?php require_once '../includes/header.php'; ?>
 <?php
 if($_SESSION['role'] !== 'admin') {
-  header("Location: ". APPURL);
+  header("Location: ../../index.php");
 }
 
 
@@ -56,7 +56,7 @@ $products = $productsContr->listProducts();
                   <td><?php echo $product->product_price; ?></td>
                   <td><?php echo $product->exp_date; ?></td>
                   <td><?php echo $product->product_quantity; ?></td>
-                  <td><img src="<?php echo APPURL?>/assets/img/<?php echo $product->product_image; ?>" class="img-thumbnail" width="70" alt=""></td>
+                  <td><img src="../../assets/img/<?php echo $product->product_image; ?>" class="img-thumbnail" width="70" alt=""></td>
                   <?php if($product->status === 1) : ?>
                     <td class="text-success text-center ">available</td>
                   <?php else :?>

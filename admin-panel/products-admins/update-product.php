@@ -2,11 +2,11 @@
 
 <?php
 if($_SESSION['role'] !== 'admin') {
-  header("Location: ". APPURL);
+    header("Location: ../../index.php");
 }
 
 if (!isset($_GET['id'])) {
-  header("Location: ". APPURL);
+    header("Location: ../index.php");
 } else {
     $product_id = $_GET['id'];
     //Instantiate Product
@@ -42,7 +42,7 @@ if (!isset($_GET['id'])) {
     
         $updateProd = new ProductsContr($product_id, $product_title, $product_description, $product_image, $product_price, $product_qty, $product_exp, $product_cat, $status);
         $updateProd->updateProduct();
-        header("Location: ". ADMINURL . "/products-admins/show-products.php");
+        header("Location: show-products.php");
       }
 }
 
@@ -65,7 +65,7 @@ if (!isset($_GET['id'])) {
             
         </div>
         <div class="form-outline mb-4 mt-4">
-            <img width="70" src="<?php echo APPURL; ?>/assets/img/<?php echo $product[0]['product_image']; ?>" alt="" id="image" class="img-size-sm">
+            <img width="70" src="../../assets/img/<?php echo $product[0]['product_image']; ?>" alt="" id="image" class="img-size-sm">
             <input class="form-control" type="file" value="<?php echo $product[0]['product_image']; ?>" id="image" name="image">
         </div>
 

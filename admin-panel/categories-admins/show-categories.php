@@ -2,7 +2,7 @@
 
 <?php
 if($_SESSION['role'] !== 'admin') {
-  header("Location: ". APPURL);
+  header("Location: ../../index.php");
 }
 
 
@@ -42,7 +42,7 @@ $categories = $categoriesContr->getCategories();
                     <td><?php echo $category->category_name; ?></td>
                     <td><?php echo $category->category_description; ?></td>
                     <td><?php echo $category->category_icon; ?></td>
-                    <td><img src="<?php echo APPURL?>/assets/img/<?php echo $category->category_image; ?>" class="img-thumbnail" width="70" alt=""></td>
+                    <td><img src="../../assets/img/<?php echo $category->category_image; ?>" class="img-thumbnail" width="70" alt=""></td>
                     <td><a  href="update-category.php?id=<?php echo $category->category_id; ?>" class="btn btn-warning text-white text-center ">Update </a></td>
                     <td><a href="delete-category.php?id=<?php echo $category->category_id; ?>" class="btn btn-danger  text-center ">Delete </a></td>
                   </tr>

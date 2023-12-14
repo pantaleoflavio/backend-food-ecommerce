@@ -1,7 +1,7 @@
 <?php require_once '../includes/header.php'; ?>
 <?php
 if($_SESSION['role'] !== 'admin') {
-  header("Location: ". APPURL);
+  header("Location: ../../index.php");
 }
 
 
@@ -56,9 +56,9 @@ if (isset($_GET['admin_id'])) {
                     <td><?php echo $admin->user_fullname; ?></td>
                     <td><?php echo $admin->user_email; ?></td>
                     <td><?php echo $admin->username; ?></td>
-                    <td><img width="70" src="<?php echo APPURL?>/assets/img/users/<?php echo $admin->user_image; ?>" alt="" class="img-thumbnail"></td>
+                    <td><img width="70" src="../../assets/img/users/<?php echo $admin->user_image; ?>" alt="" class="img-thumbnail"></td>
                     <td><?php echo $admin->created_at; ?></td>
-                    <td><a class="btn btn-primary" href="<?php echo ADMINURL; ?>/admins/admins.php?admin_id=<?php echo $admin->user_id; ?>">set User</a></td>
+                    <td><a class="btn btn-primary" href="admins.php?admin_id=<?php echo $admin->user_id; ?>">set User</a></td>
                   </tr>
                   <?php endforeach; ?>
                 </tbody>
@@ -87,9 +87,9 @@ if (isset($_GET['admin_id'])) {
                     <td><?php echo $user->user_fullname; ?></td>
                     <td><?php echo $user->user_email; ?></td>
                     <td><?php echo $user->username; ?></td>
-                    <td><img width="70" src="<?php echo APPURL?>/assets/img/users/<?php echo $user->user_image; ?>" alt="" class="img-thumbnail"></td>
+                    <td><img width="70" src="../../assets/img/users/<?php echo $user->user_image; ?>" alt="" class="img-thumbnail"></td>
                     <td><?php echo $user->created_at; ?></td>
-                    <td><a class="btn btn-primary" href="<?php echo ADMINURL; ?>/admins/admins.php?user_id=<?php echo $user->user_id; ?>">set Admin</a></td>
+                    <td><a class="btn btn-primary" href="admins.php?user_id=<?php echo $user->user_id; ?>">set Admin</a></td>
                     
                   </tr>
                   <?php endforeach; ?>

@@ -2,7 +2,7 @@
 
 <?php
 if($_SESSION['role'] !== 'admin') {
-  header("Location: ". APPURL);
+  header("Location: ../index.php");
 }
 //Instantiate Counts Class
 include "../classes/db.classes.php";

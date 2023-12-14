@@ -1,7 +1,7 @@
 <?php require_once '../includes/header.php'; ?>
 <?php
 if($_SESSION['role'] !== 'admin') {
-  header("Location: ". APPURL);
+  header("Location: ../../index.php");
 }
 
   //Instantiate Class
