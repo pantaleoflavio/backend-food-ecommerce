@@ -60,11 +60,11 @@ if (isset($_SESSION['user_id'])) {
             $_SESSION['total_bill'] = $mySubTot + 20;
         }
 
-        echo "<script>window.location.href='" . APPURL . "/products/pay.php'</script>";
+        echo "<script>window.location.href='products/pay.php'</script>";
     }
     
 } else {
-    echo "<script>window.location.href='".APPURL."'</script>";
+    echo "<script>window.location.href='index.php'</script>";
 }
 ?>
 
@@ -175,7 +175,7 @@ if (isset($_SESSION['user_id'])) {
                             </div>
                             <!-- Validating if is empty-->
                             <p class="text-right mt-3">
-                                <input id="terms" type="checkbox"> I’ve read &amp; accept the <a href="<?php echo APPURL; ?>/terms.php">terms &amp; conditions</a>
+                                <input id="terms" type="checkbox"> I’ve read &amp; accept the <a href="terms.php">terms &amp; conditions</a>
                             </p>
                             <?php if ($mySubTot == 0) : ?>
                             <div class="btn btn-danger float-right">CART EMPTY <i class="fa fa-check"></i></div>

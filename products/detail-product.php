@@ -58,7 +58,7 @@ if(isset($_GET['id'])) {
 ?>
     <div id="page-content" class="page-content">
         <div class="banner">
-            <div class="jumbotron jumbotron-bg text-center rounded-0" style="background-image: url('<?php echo APPURL; ?>/assets/img/bg-header.jpg');">
+            <div class="jumbotron jumbotron-bg text-center rounded-0" style="background-image: url('../assets/img/bg-header.jpg');">
                 <div class="container">
                     <h1 class="pt-5">
                     <?php echo $product->product_title; ?>
@@ -74,8 +74,8 @@ if(isset($_GET['id'])) {
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="slider-zoom">
-                            <a href="<?php echo APPURL; ?>/assets/img/<?php echo $product->product_image; ?>" class="cloud-zoom" rel="transparentImage: 'data:image/gif;base64,R0lGODlhAQABAID/AMDAwAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==', useWrapper: false, showTitle: false, zoomWidth:'500', zoomHeight:'500', adjustY:0, adjustX:10" id="cloudZoom">
-                                <img alt="Detail Zoom thumbs image" src="<?php echo APPURL; ?>/assets/img/<?php echo $product->product_image; ?>" style="width: 100%;">
+                            <a href="../assets/img/<?php echo $product->product_image; ?>" class="cloud-zoom" rel="transparentImage: 'data:image/gif;base64,R0lGODlhAQABAID/AMDAwAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==', useWrapper: false, showTitle: false, zoomWidth:'500', zoomHeight:'500', adjustY:0, adjustX:10" id="cloudZoom">
+                                <img alt="Detail Zoom thumbs image" src="../assets/img/<?php echo $product->product_image; ?>" style="width: 100%;">
                             </a>
                         </div>
                     </div>
@@ -97,7 +97,7 @@ if(isset($_GET['id'])) {
                         <?php if(!isset($_SESSION['user_id'])) : ?>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    PLEASE FIRST <a href="<?php echo APPURL; ?>/auth/register.php" class="nav-link">SIGN UP</a> or <a href="<?php echo APPURL; ?>/auth/login.php" class="nav-link">SIGN IN</a>
+                                    PLEASE FIRST <a href="../auth/register.php" class="nav-link">SIGN UP</a> or <a href="../auth/login.php" class="nav-link">SIGN IN</a>
                                 </div>
                             </div>
 

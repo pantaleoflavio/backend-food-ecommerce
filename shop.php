@@ -34,7 +34,7 @@
 
 <div id="page-content" class="page-content">
     <div class="banner">
-        <div class="jumbotron jumbotron-bg text-center rounded-0" style="background-image: url('<?php echo APPURL; ?>/assets/img/bg-header.jpg');">
+        <div class="jumbotron jumbotron-bg text-center rounded-0" style="background-image: url('assets/img/bg-header.jpg');">
             <div class="container">
                 <h1 class="pt-5">
                     Shopping Page
@@ -94,13 +94,13 @@
                                 </div>
                                 <div class="card-body">
                                     <h4 class="card-title">
-                                        <a href="<?php echo APPURL ?>/products/detail-product.php?id=<?php echo $allMostProduct->product_id; ?>"><?php echo $allMostProduct->product_title; ?></a>
+                                        <a href="products/detail-product.php?id=<?php echo $allMostProduct->product_id; ?>"><?php echo $allMostProduct->product_title; ?></a>
                                     </h4>
                                     <div class="card-price">
                                         <span class="reguler">€ <?php echo $allMostProduct->product_price; ?></span>
                                         <span class="discount">€ 200.000</span>
                                     </div>
-                                    <a href="<?php echo APPURL ?>/products/detail-product.php?id=<?php echo $allMostProduct->product_id; ?>" class="btn btn-block btn-primary">
+                                    <a href="products/detail-product.php?id=<?php echo $allMostProduct->product_id; ?>" class="btn btn-block btn-primary">
                                         Add to Cart
                                     </a>
 
@@ -141,13 +141,13 @@
                                 </div>
                                 <div class="card-body">
                                     <h4 class="card-title">
-                                        <a href="<?php echo APPURL ?>/products/detail-product.php?id=<?php echo $allVegetable->product_id; ?>"><?php echo $allVegetable->product_title; ?></a>
+                                        <a href="products/detail-product.php?id=<?php echo $allVegetable->product_id; ?>"><?php echo $allVegetable->product_title; ?></a>
                                     </h4>
                                     <div class="card-price">
                                         <span class="reguler">€ <?php echo $allVegetable->product_price; ?></span>
                                         <span class="discount">€ 200.000</span>
                                     </div>
-                                    <a href="<?php echo APPURL ?>/products/detail-product.php?id=<?php echo $allVegetable->product_id; ?>" class="btn btn-block btn-primary">
+                                    <a href="products/detail-product.php?id=<?php echo $allVegetable->product_id; ?>" class="btn btn-block btn-primary">
                                         Add to Cart
                                     </a>
 
@@ -188,13 +188,13 @@
                                 </div>
                                 <div class="card-body">
                                     <h4 class="card-title">
-                                        <a href="<?php echo APPURL ?>/products/detail-product.php?id=<?php echo $allMeat->product_id; ?>"><?php echo $allMeat->product_title; ?></a>
+                                        <a href="products/detail-product.php?id=<?php echo $allMeat->product_id; ?>"><?php echo $allMeat->product_title; ?></a>
                                     </h4>
                                     <div class="card-price">
                                         <span class="reguler">€ <?php echo $allMeat->product_price; ?></span>
                                         <span class="discount">€ 200.000</span>
                                     </div>
-                                    <a href="<?php echo APPURL ?>/products/detail-product.php?id=<?php echo $allMeat->product_id; ?>" class="btn btn-block btn-primary">
+                                    <a href="products/detail-product.php?id=<?php echo $allMeat->product_id; ?>" class="btn btn-block btn-primary">
                                         Add to Cart
                                     </a>
 
@@ -236,13 +236,13 @@
                                 </div>
                                 <div class="card-body">
                                     <h4 class="card-title">
-                                        <a href="<?php echo APPURL ?>/products/detail-product.php?id=<?php echo $allFish->product_id; ?>"><?php echo $allFish->product_title; ?></a>
+                                        <a href="products/detail-product.php?id=<?php echo $allFish->product_id; ?>"><?php echo $allFish->product_title; ?></a>
                                     </h4>
                                     <div class="card-price">
                                         <span class="reguler">€ <?php echo $allFish->product_price; ?></span>
                                         <span class="discount">€ 200.000</span>
                                     </div>
-                                    <a href="<?php echo APPURL ?>/products/detail-product.php?id=<?php echo $allFish->product_id; ?>" class="btn btn-block btn-primary">
+                                    <a href="products/detail-product.php?id=<?php echo $allFish->product_id; ?>" class="btn btn-block btn-primary">
                                         Add to Cart
                                     </a>
 
@@ -283,13 +283,13 @@
                                 </div>
                                 <div class="card-body">
                                     <h4 class="card-title">
-                                        <a href="<?php echo APPURL ?>/products/detail-product.php?id=<?php echo $allFruit->product_id; ?>"><?php echo $allFruit->product_title; ?></a>
+                                        <a href="products/detail-product.php?id=<?php echo $allFruit->product_id; ?>"><?php echo $allFruit->product_title; ?></a>
                                     </h4>
                                     <div class="card-price">
                                         <span class="reguler">€ <?php echo $allFruit->product_price; ?></span>
                                         <span class="discount">€ 200.000</span>
                                     </div>
-                                    <a href="<?php echo APPURL ?>/products/detail-product.php?id=<?php echo $allFruit->product_id; ?>" class="btn btn-block btn-primary">
+                                    <a href="products/detail-product.php?id=<?php echo $allFruit->product_id; ?>" class="btn btn-block btn-primary">
                                         Add to Cart
                                     </a>
 

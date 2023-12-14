@@ -9,22 +9,22 @@
                     <h5>Links</h5>
                     <ul>
                         <li>
-                            <a href="<?php echo APPURL; ?>/about.php">About</a>
+                            <a href="<?php echo $_COOKIE['appleader']; ?>/about.php">About</a>
                         </li>
                         <li>
-                            <a href="<?php echo APPURL; ?>/contact.php">Contact Us</a>
+                            <a href="<?php echo $_COOKIE['appleader']; ?>/contact.php">Contact Us</a>
                         </li>
                         <li>
-                            <a href="<?php echo APPURL; ?>/faq.php">FAQ</a>
+                            <a href="<?php echo $_COOKIE['appleader']; ?>/faq.php">FAQ</a>
                         </li>
                         <li>
                             <a href="javascript:void(0)">How it Works</a>
                         </li>
                         <li>
-                            <a href="<?php echo APPURL; ?>/terms.php">Terms</a>
+                            <a href="<?php echo $_COOKIE['appleader']; ?>/terms.php">Terms</a>
                         </li>
                         <li>
-                            <a href="<?php echo APPURL; ?>/privacy.php">Privacy Policy</a>
+                            <a href="<?php echo $_COOKIE['appleader']; ?>/privacy.php">Privacy Policy</a>
                         </li>
                     </ul>
                 </div>
@@ -56,11 +56,11 @@
                      <h5>Get Our App</h5>
                      <ul class="mb-0">
                          <li class="download-app">
-                             <a href="#"><img src="<?php echo APPURL; ?>/assets/img/playstore.png"></a>
+                             <a href="#"><img src="<?php echo $_COOKIE['appleader']; ?>/assets/img/playstore.png"></a>
                          </li>
                          <li style="height: 200px">
                              <div class="mockup">
-                                 <img src="<?php echo APPURL; ?>/assets/img/mockup.png">
+                                 <img src="<?php echo $_COOKIE['appleader']; ?>/assets/img/mockup.png">
                              </div>
                          </li>
                      </ul>
@@ -70,15 +70,15 @@
         <p class="copyright">&copy; 2018 Freshcery | Groceries Organic Store. All rights reserved.</p>
     </footer>
 
-    <script type="text/javascript" src="<?php echo APPURL; ?>/assets/js/jquery.js"></script>
-    <script type="text/javascript" src="<?php echo APPURL; ?>/assets/js/jquery-migrate.js"></script>
-    <script type="text/javascript" src="<?php echo APPURL; ?>/assets/packages/bootstrap/libraries/popper.js"></script>
-    <script type="text/javascript" src="<?php echo APPURL; ?>/assets/packages/bootstrap/bootstrap.js"></script>
-    <script type="text/javascript" src="<?php echo APPURL; ?>/assets/packages/o2system-ui/o2system-ui.js"></script>
-    <script type="text/javascript" src="<?php echo APPURL; ?>/assets/packages/owl-carousel/owl-carousel.js"></script>
-    <script type="text/javascript" src="<?php echo APPURL; ?>/assets/packages/cloudzoom/cloudzoom.js"></script>
-    <script type="text/javascript" src="<?php echo APPURL; ?>/assets/packages/thumbelina/thumbelina.js"></script>
-    <script type="text/javascript" src="<?php echo APPURL; ?>/assets/packages/bootstrap-touchspin/bootstrap-touchspin.js"></script>
-    <script type="text/javascript" src="<?php echo APPURL; ?>/assets/js/theme.js"></script>
+    <script type="text/javascript" src="<?php echo $_COOKIE['appleader']; ?>/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="<?php echo $_COOKIE['appleader']; ?>/assets/js/jquery-migrate.js"></script>
+    <script type="text/javascript" src="<?php echo $_COOKIE['appleader']; ?>/assets/packages/bootstrap/libraries/popper.js"></script>
+    <script type="text/javascript" src="<?php echo $_COOKIE['appleader']; ?>/assets/packages/bootstrap/bootstrap.js"></script>
+    <script type="text/javascript" src="<?php echo $_COOKIE['appleader']; ?>/assets/packages/o2system-ui/o2system-ui.js"></script>
+    <script type="text/javascript" src="<?php echo $_COOKIE['appleader']; ?>/assets/packages/owl-carousel/owl-carousel.js"></script>
+    <script type="text/javascript" src="<?php echo $_COOKIE['appleader']; ?>/assets/packages/cloudzoom/cloudzoom.js"></script>
+    <script type="text/javascript" src="<?php echo $_COOKIE['appleader']; ?>/assets/packages/thumbelina/thumbelina.js"></script>
+    <script type="text/javascript" src="<?php echo $_COOKIE['appleader']; ?>/assets/packages/bootstrap-touchspin/bootstrap-touchspin.js"></script>
+    <script type="text/javascript" src="<?php echo $_COOKIE['appleader']; ?>/assets/js/theme.js"></script>
 </body>
 </html>

@@ -17,14 +17,14 @@ if (isset($_SESSION['user_id'])) {
     $cartProducts = $cart->fetchAll(PDO::FETCH_OBJ);
     
 } else {
-    echo "<script>window.location.href='".APPURL."'</script>";
+    echo "<script>window.location.href='../index.php'</script>";
 }
 
 ?>
 
     <div id="page-content" class="page-content">
         <div class="banner">
-            <div class="jumbotron jumbotron-bg text-center rounded-0" style="background-image: url('<?php echo APPURL; ?>/assets/img/bg-header.jpg');">
+            <div class="jumbotron jumbotron-bg text-center rounded-0" style="background-image: url('../assets/img/bg-header.jpg');">
                 <div class="container">
                     <h1 class="pt-5">
                         Your Cart
@@ -59,7 +59,7 @@ if (isset($_SESSION['user_id'])) {
                                     <?php foreach($cartProducts as $cartProduct) : ?>
                                         <tr>
                                             <td>
-                                                <img src="<?php echo APPURL; ?>/assets/img/<?php echo $cartProduct->pro_image; ?>" width="60">
+                                                <img src="../assets/img/<?php echo $cartProduct->pro_image; ?>" width="60">
                                             </td>
                                             <td>
                                                 <?php echo $cartProduct->pro_title; ?><br>
@@ -82,7 +82,7 @@ if (isset($_SESSION['user_id'])) {
                                         </tr>
                                     <?php endforeach; ?>
                                 <?php else : ?>
-                                    <tr class="text-center bg-success">>
+                                    <tr class="text-center bg-success">
                                         <td colspan="7">THE CART IS EMPTY</td>
                                     </tr>
                                 <?php endif; ?>
@@ -92,13 +92,13 @@ if (isset($_SESSION['user_id'])) {
                     </div>
 
                     <div class="col">
-                        <a href="<?php echo APPURL; ?>/shop.php" class="btn btn-default">Continue Shopping</a>
+                        <a href="../shop.php" class="btn btn-default">Continue Shopping</a>
                     </div>
                     <div class="col text-right">
                         <div class="clearfix"></div>
                         <?php if(count($cartProducts) > 0) : ?>
                             <h6 class="mt-3">Total: € <?php echo $totalCart ?></h6>
-                            <a href="<?php echo APPURL; ?>/checkout.php" class="btn btn-lg btn-primary">Checkout <i class="fa fa-long-arrow-right"></i></a>
+                            <a href="../checkout.php" class="btn btn-lg btn-primary">Checkout <i class="fa fa-long-arrow-right"></i></a>
                         <?php else : ?>
                             <h6 class="mt-3">Total: € 0</h6>
                             <button class="btn btn-lg btn-primary" disabled> Cart is empty <i class="fa fa-long-arrow-right"></i></button>

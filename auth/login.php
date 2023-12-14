@@ -2,7 +2,7 @@
 <?php require_once "../config/config.php"; ?>
 <?php 
 if(isset($_SESSION['username'])) {
-    echo "<script>window.location.href='" . APPURL . "'</script>";
+    echo "<script>window.location.href='../index.php'</script>";
 } else {
     if (isset($_POST['submit'])) {
 
@@ -19,7 +19,7 @@ if(isset($_SESSION['username'])) {
         $login->loginUser();
 
         // Going to back to front page
-        header("location: ".APPURL);
+        header("location: ../index.php");
 
 
     }
@@ -29,7 +29,7 @@ if(isset($_SESSION['username'])) {
 
     <div id="page-content" class="page-content">
         <div class="banner">
-            <div class="jumbotron jumbotron-bg text-center rounded-0" style="background-image: url('<?php echo APPURL; ?>/assets/img/bg-header.jpg');">
+            <div class="jumbotron jumbotron-bg text-center rounded-0" style="background-image: url('../assets/img/bg-header.jpg');">
                 <div class="container">
                     <h1 class="pt-5">
                         Login Page
