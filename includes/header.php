@@ -1,14 +1,13 @@
 <?php 
     session_start();
 
+    //$GLOBALS['appleader'] = "http://" . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
 
     if (!isset($_COOKIE['appleader'])) {
-        setcookie("appleader", "http://" . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'], time() + 43200, "/");
+        $cookieValue = "http://" . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+        setcookie("appleader", "", time() - 1, "/");
+        setcookie("appleader", $cookieValue, time() + 43200, "/");
     }
-    
-    //echo $_COOKIE['appleader'] .' sono fuori if';
-
-    //define("APPURL", ".");
 
 
 ?>
