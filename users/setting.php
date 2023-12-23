@@ -8,9 +8,10 @@ if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $_GET['id']) {
     include "../admin-panel/classes/user-contr.classes.php";
     $id = $_SESSION['user_id'];
 
-    $userContr = new UserContr($id, $fullname = null, $email = null, $username = null, $user_image = null, $password = null);
+    $userModel = new User();
+    $userContr = new UserContr($userModel);
 
-    $user = $userContr->getUser();
+    $user = $userContr->getUser($id);
 
     if (isset($_POST['submit'])) {
 
@@ -21,7 +22,6 @@ if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $_GET['id']) {
         $user_pic = $_FILES['image']['name'];
         $user_image_temp = $_FILES['image']['tmp_name'];
         move_uploaded_file($user_image_temp,  "../assets/img/users/$user_pic");
-        
         
         $update = $conn->prepare("UPDATE users SET user_fullname=:fullname, user_email=:email, username=:username, user_image=:user_pic WHERE user_id='$id'");
         $update->bindParam(':fullname', $fullname);
