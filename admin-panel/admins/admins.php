@@ -7,6 +7,7 @@ if($_SESSION['role'] !== 'admin') {
 
 //Instantiate SignupContr Class
 
+include "../../classes/db.classes.php";
 include "../classes/user-contr.classes.php";
 $usersContr = new UserContr();
 $users = $usersContr->getUsers('customer');
