@@ -6,24 +6,23 @@ if($_SESSION['role'] !== 'admin') {
 
 
 //Instantiate SignupContr Class
-include "../../classes/db.classes.php";
-include "../classes/users.classes.php";
-include "../classes/users-contr.classes.php";
-$usersContr = new UsersContr();
-$admins = $usersContr->getAdmins();
+
+include "../classes/user-contr.classes.php";
+$usersContr = new UserContr();
 $users = $usersContr->getUsers();
+$admins = $usersContr->getAdmins();
 
 
 
 if (isset($_GET['user_id'])) {
   $user_id = $_GET['user_id'];
-  $setAdmin = $usersContr->setAdmin($user_id);
+  $setAdmin = $usersContr->setRoleAdmin($user_id);
   header("Location: ". ADMINURL . "/admins/admins.php");
 }
 
 if (isset($_GET['admin_id'])) {
   $admin_id = $_GET['admin_id'];
-  $setUser = $usersContr->setUser($admin_id);
+  $setUser = $usersContr->setRoleUser($admin_id);
   header("Location: ". ADMINURL . "/admins/admins.php");
 }
 
@@ -50,7 +49,7 @@ if (isset($_GET['admin_id'])) {
                   </tr>
                 </thead>
                 <tbody>
-                  <?php foreach($admins as $admin) : ?>
+                <?php foreach($admins as $admin) : ?>
                   <tr>
                     <td scope="row"><?php echo $admin->user_id; ?></td>
                     <td><?php echo $admin->user_fullname; ?></td>
@@ -58,7 +57,8 @@ if (isset($_GET['admin_id'])) {
                     <td><?php echo $admin->username; ?></td>
                     <td><img width="70" src="../../assets/img/users/<?php echo $admin->user_image; ?>" alt="" class="img-thumbnail"></td>
                     <td><?php echo $admin->created_at; ?></td>
-                    <td><a class="btn btn-primary" href="admins.php?admin_id=<?php echo $admin->user_id; ?>">set User</a></td>
+                    <td><a class="btn btn-primary" href="admins.php?admin_id=<?php echo $admin->user_id; ?>">set as Customer</a></td>
+                    
                   </tr>
                   <?php endforeach; ?>
                 </tbody>
