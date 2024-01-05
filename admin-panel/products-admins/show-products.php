@@ -5,25 +5,25 @@ if($_SESSION['role'] !== 'admin') {
 }
 
 
-//Instantiate Cats
+//Instantiate Classes
 include "../../classes/db.classes.php";
-include "../classes/categories.classes.php";
-include "../classes/categories-contr.classes.php";
-$categoriesContr = new CategoriesContr($arg1 = null, $arg2 = null, $arg3 = null, $arg4 = null, $arg5 = null);
-$categories = $categoriesContr->getCategories();
+include "../classes/category-contr.classes.php";
+include "../classes/product-contr.classes.php";
+$categoryContr = new CategoryContr();
+$productsContr = new ProductContr();
 
-//Instantiate Products
-include "../classes/products.classes.php";
-include "../classes/products-contr.classes.php";
+$categories = $categoryContr->getCategories();
+
+
 
 
 ?>
 
 <?php foreach($categories as $category) : ?>
 <?php
+
 $cat_id = $category->category_id;
-$productsContr = new ProductsContr($arg1 = null, $arg2 = null, $arg3 = null, $arg4 = null, $arg5 = null, $arg6 = null, $arg7 = null, $cat_id, $arg9 = null);
-$products = $productsContr->listProducts();
+$products = $productsContr->getProducts($cat_id);
 
 ?>
   <div class="row">
@@ -63,7 +63,7 @@ $products = $productsContr->listProducts();
                     <td class="text-danger text-center ">not available</td>
                   <?php endif;?>
                     <td><a href="update-product.php?id=<?php echo $product->product_id; ?>" class="btn btn-warning  text-center ">modify</a></td>
-                    <td><a href="#" class="btn btn-danger  text-center ">delete</a></td>
+                    <td><a href="show-products.php?action=delete&id=<?php echo $product->product_id; ?>" class="btn btn-danger  text-center ">delete</a></td>
                 </tr>
               <?php endforeach; ?>
             </tbody>

@@ -1,7 +1,10 @@
 <?php
-class Products extends DB {
 
-    protected function getProducts($cat_id){
+include "product.classes.php";
+
+class ProductContr extends DB {
+
+    public function getProducts($cat_id){
         $stmt = $this->connect()->prepare("SELECT * FROM products WHERE category_id = ?");
 
         if(!$stmt->execute([$cat_id])){
@@ -15,16 +18,17 @@ class Products extends DB {
         
     }
 
-    protected function singleProduct($id){
+    public function getSingleProduct($id){
         $stmt = $this->connect()->prepare("SELECT * FROM products WHERE product_id = ?");
 
         if(!$stmt->execute([$id])){
-            $stmt = null;
-            header("location: ../index.php?error=stmtfailed");
-            exit();
+            $singleProduct = null;
+        } else {
+            
+            $singleProductDB = $stmt->fetchAll((PDO::FETCH_ASSOC));
+            $singleProduct = new Product($singleProductDB[0]['product_id'], $singleProductDB[0]['product_title'], $singleProductDB[0]['product_description'], $singleProductDB[0]['product_image'], $singleProductDB[0]['product_price'], $singleProductDB[0]['product_quantity'], $singleProductDB[0]['exp_date'], $singleProductDB[0]['category_id'], $singleProductDB[0]['status']);
         }
 
-        $singleProduct = $stmt->fetchAll((PDO::FETCH_ASSOC));
         return $singleProduct;
         
     }
@@ -42,6 +46,19 @@ class Products extends DB {
         
     }
 
+
+    public function updateProduct() {
+        
+        return $this->updateSingleProduct($this->product_id, $this->product_title, $this->product_description, $this->product_image, $this->product_price,
+        $this->product_quantity, $this->exp_date, $this->category_id, $this->status);
+
+    }
+
+
+
+    
+
+    
 }
 
 

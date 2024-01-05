@@ -11,15 +11,14 @@ if (!isset($_GET['id'])) {
     $product_id = $_GET['id'];
     //Instantiate Product
     include "../../classes/db.classes.php";
-    include "../classes/products.classes.php";
-    include "../classes/products-contr.classes.php";
-    $productsContr = new ProductsContr($product_id , $arg2 = null, $arg3 = null, $arg4 = null, $arg5 = null, $arg6 = null, $arg7 = null, $arg8 = null, $arg9 = null);
-    $product = $productsContr->getSingleProduct();
+    include "../classes/product-contr.classes.php";
+    $productContr = new ProductContr();
+    $product = $productContr->getSingleProduct($product_id);
 
     //Instantiate Categories
-    include "../classes/categories.classes.php";
-    include "../classes/categories-contr.classes.php";
-    $categoriesContr = new CategoriesContr($arg1 = null, $arg2 = null, $arg3 = null, $arg4 = null, $arg5 = null);
+
+    include "../classes/category-contr.classes.php";
+    $categoriesContr = new CategoryContr();
     $categories = $categoriesContr->getCategories();
 
     if (isset($_POST['submit'])) {
@@ -40,8 +39,8 @@ if (!isset($_GET['id'])) {
         $product_cat = $_POST['category'];
         $status = $_POST['status'];
     
-        $updateProd = new ProductsContr($product_id, $product_title, $product_description, $product_image, $product_price, $product_qty, $product_exp, $product_cat, $status);
-        $updateProd->updateProduct();
+        //$updateProd = new ProductContr($product_id, $product_title, $product_description, $product_image, $product_price, $product_qty, $product_exp, $product_cat, $status);
+        //$updateProd->updateProduct();
         header("Location: show-products.php");
       }
 }
@@ -57,30 +56,31 @@ if (!isset($_GET['id'])) {
     <form method="POST" action="" enctype="multipart/form-data">
         <!-- Email input -->
         <div class="form-outline mb-4 mt-4">
-            <input type="text" name="name" id="name" value="<?php echo $product[0]['product_title'];  ?>" class="form-control" placeholder="name" />
+            <input type="text" name="name" id="name" value="<?php echo $product->product_title;  ?>" class="form-control" placeholder="name" />
             
         </div>
         <div class="form-outline mb-4 mt-4">
-            <input type="text" name="description" id="description" value="<?php echo $product[0]['product_description'];  ?>" class="form-control" placeholder="Description" />
+            <input type="text" name="description" id="description" value="<?php echo $product->product_description;  ?>" class="form-control" placeholder="Description" />
             
         </div>
         <div class="form-outline mb-4 mt-4">
-            <img width="70" src="../../assets/img/<?php echo $product[0]['product_image']; ?>" alt="" id="image" class="img-size-sm">
-            <input class="form-control" type="file" value="<?php echo $product[0]['product_image']; ?>" id="image" name="image">
+            <img width="70" src="../../assets/img/<?php echo $product->product_image; ?>" alt="" class="img-size-sm">
+            <input class="form-control" type="file" id="image" name="image">
         </div>
+
 
         <div class="form-outline mb-4 mt-4">
             <label for="price">price:</label>
-            <input type="number" name="price" id="price" value="<?php echo $product[0]['product_price'];  ?>" class="form-control" step="0.01" placeholder="Description" />
+            <input type="number" name="price" id="price" value="<?php echo $product->product_price;  ?>" class="form-control" step="0.01" placeholder="Description" />
         </div>
         <div class="form-outline mb-4 mt-4">
         <label for="expiration">expiration:</label>
-            <input type="number" name="expiration" id="expiration" min="<?php echo $product[0]['exp_date'] ?>" max="2025" value="<?php echo $product[0]['exp_date']; ?>" class="form-control" placeholder="Description" />
+            <input type="number" name="expiration" id="expiration" min="<?php echo $product->exp_date; ?>" max="2025" value="<?php echo $product->exp_date; ?>" class="form-control" placeholder="Description" />
         </div>
 
         <div class="form-outline mb-4 mt-4">
             <label for="qty">quantity:</label>
-            <input type="number" name="qty" id="qty" min="0" value="<?php echo $product[0]['product_quantity'];  ?>" class="form-control form-control-qty" />
+            <input type="number" name="qty" id="qty" min="0" value="<?php echo $product->product_quantity;  ?>" class="form-control form-control-qty" />
         </div>
 
         <div class="form-outline mb-4 mt-4">
