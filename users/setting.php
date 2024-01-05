@@ -4,14 +4,12 @@
 <?php
 if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $_GET['id']) {
     include "../classes/db.classes.php";
-    include "../admin-panel/classes/user.classes.php";
+    //include "../admin-panel/classes/user.classes.php";
     include "../admin-panel/classes/user-contr.classes.php";
     $id = $_SESSION['user_id'];
 
-    $userModel = new User();
-    $userContr = new UserContr($userModel);
-
-    $user = $userContr->getUser($id);
+    $userController = new UserContr();
+    $user = $userController->getSingleUser($id);
 
     if (isset($_POST['submit'])) {
 
@@ -63,23 +61,23 @@ if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $_GET['id']) {
                             <fieldset>
                                 <div class="form-group row">
                                     <div class="col">
-                                        <input name="fullname" class="form-control" placeholder="Full Name" type="text" value="<?php echo $user[0]['user_fullname']; ?>">
+                                        <input name="fullname" class="form-control" placeholder="Full Name" type="text" value="<?php echo $user->fullname; ?>">
                                     </div>
                                    
                                 </div>
                                
                                 <div class="form-group">
-                                    <input name="email" type="email" class="form-control" placeholder="Email" value="<?php echo $user[0]['user_email']; ?>">
+                                    <input name="email" type="email" class="form-control" placeholder="Email" value="<?php echo $user->email; ?>">
                                 </div>
                                 <div class="form-group">
-                                    <input name="username" class="form-control" placeholder="Username" type="text" value="<?php echo $user[0]['username']; ?>">
+                                    <input name="username" class="form-control" placeholder="Username" type="text" value="<?php echo $user->username; ?>">
                                 </div>
                                 <div class="form-group">
                                     <div>
                                         <label for="immagine">Select a new image:</label>
                                     </div>
-                                    <img width="150" src="../assets/img/users/<?php echo $user[0]['user_image']; ?>" alt="" id="image" name="image" class="img-size-sm">
-                                    <input class="form-control" type="file" id="image" name="image" value="<?php echo $user[0]['user_image']; ?>">
+                                    <img width="150" src="../assets/img/users/<?php echo $user->user_pic; ?>" alt="" id="image" name="image" class="img-size-sm">
+                                    <input class="form-control" type="file" id="image" name="image" value="<?php echo $user->user_pic; ?>">
                                 </div>
                                 <div class="form-group text-right">
                                     <button type="submit" name="submit" class="btn btn-primary">UPDATE</button>

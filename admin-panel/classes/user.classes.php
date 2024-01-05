@@ -1,18 +1,23 @@
 <?php
 
-class User extends DB {
+class User {
 
-    protected function getSingleUser($id) {
-        $stmt = $this->connect()->prepare("SELECT * FROM users WHERE user_id = ?");
-        if(!$stmt->execute([$id])){
-            $stmt = null;
-            header("location: ../index.php?error=stmtfailed");
-            exit();
-        }
+    public $id;
+    public $fullname;
+    public $email;
+    public $username;
+    public $user_pic;
+    public $role;
 
-        $user = $stmt->fetchAll((PDO::FETCH_ASSOC));
-        return $user;
+    public function __construct($id, $fullname, $email, $username, $user_pic, $role) {
+        $this->id = $id;
+        $this->fullname = $fullname;
+        $this->email = $email;
+        $this->username = $username;
+        $this->user_pic = $user_pic;
+        $this->role = $role;
     }
+
 
     
 }
