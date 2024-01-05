@@ -9,8 +9,8 @@ if($_SESSION['role'] !== 'admin') {
 
 include "../classes/user-contr.classes.php";
 $usersContr = new UserContr();
-$users = $usersContr->getUsers();
-$admins = $usersContr->getAdmins();
+$users = $usersContr->getUsers('customer');
+$admins = $usersContr->getUsers('admin');
 
 
 

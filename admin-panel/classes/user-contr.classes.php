@@ -1,9 +1,11 @@
 <?php
 
 include "user.classes.php";
-include "../../classes/db.classes.php";
+
 class UserContr extends DB {
     
+
+    // SIngle User Methods
     public function getSingleUser($id) {
         $stmt = $this->connect()->prepare("SELECT * FROM users WHERE user_id = ?");
         if(!$stmt->execute([$id])){
@@ -17,30 +19,31 @@ class UserContr extends DB {
         return $user;
     }
 
-    public function getAdmins() {
-        $stmt = $this->connect()->prepare("SELECT * FROM users WHERE role = 'admin'");
-        if(!$stmt->execute()){
-            $admins = null;
-
-        } else {
-
-            $admins = $stmt->fetchAll((PDO::FETCH_OBJ));
-        
+    public function updateSingleUser($id, $fullname, $email, $username, $user_image) {
+        $stmt = $this->connect()->prepare("UPDATE users SET user_fullname=?, user_email=?, username=?, user_image=? WHERE user_id=?");
+    
+        try {
+            $stmt->bindParam(1, $fullname);
+            $stmt->bindParam(2, $email);
+            $stmt->bindParam(3, $username);
+            $stmt->bindParam(4, $user_image);
+            $stmt->bindParam(5, $id);
+    
+            $stmt->execute();
+    
+            return true; // Successo
+        } catch (PDOException $e) {
+            error_log("PDOException in setSingleUser: " . $e->getMessage());
+            return false;
         }
-
-        return $admins;
     }
 
-    public function getUsers() {
-        $stmt = $this->connect()->prepare("SELECT * FROM users WHERE role = 'customer'");
-        if(!$stmt->execute()){
-            $users = null;
 
-        } else {
-            $users = $stmt->fetchAll((PDO::FETCH_OBJ));
-        }
-
-        return $users;
+    // ALL USERS METHODS
+    public function getUsers($role) {
+        $stmt = $this->connect()->prepare("SELECT * FROM users WHERE role = ?");
+        $stmt->execute([$role]);
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
     public function setRoleAdmin($user_id){

@@ -17,21 +17,21 @@ if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $_GET['id']) {
         $email = $_POST['email'];
         $username = $_POST['username'];
 
-        $user_pic = $_FILES['image']['name'];
-        $user_image_temp = $_FILES['image']['tmp_name'];
-        move_uploaded_file($user_image_temp,  "../assets/img/users/$user_pic");
+        if (!empty($_FILES['image']['name'])) {
+            $user_pic = $_FILES['image']['name'];
+            $user_image_temp = $_FILES['image']['tmp_name'];
+            move_uploaded_file($user_image_temp,  "../assets/img/users/$user_pic");
+        } else {
+            $user_pic = $user->user_pic;
+        }
         
-        $update = $conn->prepare("UPDATE users SET user_fullname=:fullname, user_email=:email, username=:username, user_image=:user_pic WHERE user_id='$id'");
-        $update->bindParam(':fullname', $fullname);
-        $update->bindParam(':email', $email);
-        $update->bindParam(':username', $username);
-        $update->bindParam(':user_pic', $user_pic);
-        $update->execute();
-        echo "<script>window.location.href='" . APPURL . "/users/setting.php?id=".$_SESSION['user_id']."'</script>";
+        $userUpdate = $userController->updateSingleUser($id, $fullname, $email, $username, $user_pic);
+
+        echo "<script>window.location.href='" . $_COOKIE['appleader'] . "/users/setting.php?id=".$_SESSION['user_id']."'</script>";
     }
 
 } else {
-    echo "<script>window.location.href='" . APPURL . "'</script>";
+    echo "<script>window.location.href='" . $_COOKIE['appleader'] . "'</script>";
 }
 
 
