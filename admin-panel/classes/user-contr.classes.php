@@ -13,7 +13,7 @@ class UserContr extends DB {
 
         } else {
             $userDB = $stmt->fetchAll((PDO::FETCH_ASSOC));
-            $user = new User($userDB[0]['user_id'], $userDB[0]['user_fullname'], $userDB[0]['user_email'], $userDB[0]['username'], $userDB[0]['user_image'], $role = null);
+            $user = new User($userDB[0]['user_id'], $userDB[0]['user_fullname'], $userDB[0]['user_email'], $userDB[0]['username'], $userDB[0]['user_image'], $userDB[0]['role']);
         }
 
         return $user;
@@ -33,7 +33,7 @@ class UserContr extends DB {
     
             return true; // Successo
         } catch (PDOException $e) {
-            error_log("PDOException in setSingleUser: " . $e->getMessage());
+            error_log("PDOException in updateSingleUser: " . $e->getMessage());
             return false;
         }
     }

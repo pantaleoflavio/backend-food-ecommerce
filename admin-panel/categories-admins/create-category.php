@@ -6,8 +6,8 @@ if($_SESSION['role'] !== 'admin') {
 
   //Instantiate Class
   include "../../classes/db.classes.php";
-  include "../classes/categories.classes.php";
-  include "../classes/categories-contr.classes.php";
+  include "../classes/category-contr.classes.php";
+  $categoryContr = new CategoryContr();
   
 
 
@@ -15,15 +15,12 @@ if($_SESSION['role'] !== 'admin') {
     $cat_name = $_POST['name'];
     $cat_description = $_POST['description'];
     $cat_icon = $_POST['icon'];
+
     $cat_image = $_FILES['image']['name'];
     $cat_image_temp = $_FILES['image']['tmp_name'];
+    move_uploaded_file($cat_image_temp,  "../../assets/img/$cat_image");
 
-    $target_directory = $_SERVER['DOCUMENT_ROOT'] . "/freshcherry/assets/img/";
-    $target_path = $target_directory . $cat_image;
-
-    move_uploaded_file($cat_image_temp, $target_path);
-    $categoriesContr = new CategoriesContr($arg1 = null, $cat_name, $cat_image, $cat_description, $cat_icon);
-    $categoriesContr->createCategory();
+    $newCategory = $categoryContr->createSingleCategory($cat_name, $cat_image, $cat_description, $cat_icon);
     header("Location: ". ADMINURL. "/categories-admins/show-categories.php");
   }
 
