@@ -161,20 +161,6 @@
     <!-- END FOREACH OF THE CATEGORIES -->
     <?php endforeach; ?>
 
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
 </div>
 
 <?php require_once "includes/footer.php"; ?>
