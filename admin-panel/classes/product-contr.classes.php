@@ -4,7 +4,21 @@ include "product.classes.php";
 
 class ProductContr extends DB {
 
-    public function getProducts($cat_id){
+    public function getProducts(){
+        $stmt = $this->connect()->prepare("SELECT * FROM products");
+
+        if(!$stmt->execute()){
+            $stmt = null;
+            header("location: ../index.php?error=stmtfailed");
+            exit();
+        }
+
+        $products = $stmt->fetchAll((PDO::FETCH_OBJ));
+        return $products;
+        
+    }
+
+    public function getProductsByCategory($cat_id){
         $stmt = $this->connect()->prepare("SELECT * FROM products WHERE category_id = ?");
 
         if(!$stmt->execute([$cat_id])){

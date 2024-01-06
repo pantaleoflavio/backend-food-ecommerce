@@ -26,7 +26,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'delete' && isset($_GET['id'])
 <?php
 
 $cat_id = $category->category_id;
-$products = $productsContr->getProducts($cat_id);
+$products = $productsContr->getProductsByCategory($cat_id);
 
 ?>
   <div class="row">
