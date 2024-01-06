@@ -33,30 +33,67 @@ class ProductContr extends DB {
         
     }
 
-    protected function updateSingleProduct($id, $title, $description, $image, $price, $qty, $exp_date, $cat, $status){
+    public function updateSingleProduct($id, $title, $description, $image, $price, $qty, $exp_date, $cat, $status){
         $stmt = $this->connect()->prepare("UPDATE products SET product_title = ?, product_description = ?, product_image = ?, product_price= ?, product_quantity = ?, exp_date =?,  category_id = ?, status = ? WHERE product_id = ?");
 
-        if(!$stmt->execute([$title, $description, $image, $price, $qty, $exp_date, $cat, $status, $id])){
-            $stmt = null;
-            header("location: ../index.php?error=stmtfailed");
-            exit();
-        }
-
-        $stmt = null;
-        
-    }
-
-
-    public function updateProduct() {
-        
-        return $this->updateSingleProduct($this->product_id, $this->product_title, $this->product_description, $this->product_image, $this->product_price,
-        $this->product_quantity, $this->exp_date, $this->category_id, $this->status);
-
-    }
-
-
-
+        try {
+            $stmt->bindParam(1, $title);
+            $stmt->bindParam(2, $description);
+            $stmt->bindParam(3, $image);
+            $stmt->bindParam(4, $price);
+            $stmt->bindParam(5, $qty);
+            $stmt->bindParam(6, $exp_date);
+            $stmt->bindParam(7, $cat);
+            $stmt->bindParam(8, $status);
+            $stmt->bindParam(9, $id);
     
+            $stmt->execute();
+    
+            return true; // Successo
+        } catch (PDOException $e) {
+            error_log("PDOException in updateSingleProduct: " . $e->getMessage());
+            return false;
+        }
+        
+    }
+
+    public function createSingleProduct($title, $description, $image, $price, $qty, $exp_date, $cat, $status){
+        $stmt = $this->connect()->prepare("INSERT INTO products (product_title, product_description, product_image, product_price, product_quantity, exp_date,  category_id, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+
+        try {
+            $stmt->bindParam(1, $title);
+            $stmt->bindParam(2, $description);
+            $stmt->bindParam(3, $image);
+            $stmt->bindParam(4, $price);
+            $stmt->bindParam(5, $qty);
+            $stmt->bindParam(6, $exp_date);
+            $stmt->bindParam(7, $cat);
+            $stmt->bindParam(8, $status);
+    
+            $stmt->execute();
+    
+            return true; // Successo
+        } catch (PDOException $e) {
+            error_log("PDOException in createSingleProduct: " . $e->getMessage());
+            return false;
+        }
+        
+    }
+
+    public function deleteSingleProduct($id){
+        $stmt = $this->connect()->prepare("DELETE FROM products WHERE product_id = ?");
+
+        try {
+            $stmt->bindParam(1, $id);
+            $stmt->execute();
+    
+            return true; // Successo
+        } catch (PDOException $e) {
+            error_log("PDOException in deleteSingleProduct: " . $e->getMessage());
+            return false;
+        }
+        
+    }
 
     
 }

@@ -28,10 +28,15 @@ if (!isset($_GET['id'])) {
         $product_image = $_FILES['image']['name'];
         $product_image_temp = $_FILES['image']['tmp_name'];
     
-        $target_directory = $_SERVER['DOCUMENT_ROOT'] . "/freshcherry/assets/img/";
-        $target_path = $target_directory . $product_image;
+
+        if (!empty($_FILES['image']['name'])) {
+            $product_image = $_FILES['image']['name'];
+            $product_image_temp = $_FILES['image']['tmp_name'];
+            move_uploaded_file($product_image_temp,  "../../assets/img/$product_image");
+        } else {
+            $product_image = $product->product_image;
+        }
     
-        move_uploaded_file($product_image_temp, $target_path);
     
         $product_price = $_POST['price'];
         $product_qty = $_POST['qty'];
@@ -39,8 +44,8 @@ if (!isset($_GET['id'])) {
         $product_cat = $_POST['category'];
         $status = $_POST['status'];
     
-        //$updateProd = new ProductContr($product_id, $product_title, $product_description, $product_image, $product_price, $product_qty, $product_exp, $product_cat, $status);
-        //$updateProd->updateProduct();
+        $updateProd = $productContr->updateSingleProduct($product_id, $product_title, $product_description, $product_image, $product_price, $product_qty, $product_exp, $product_cat, $status);
+        
         header("Location: show-products.php");
       }
 }
@@ -71,7 +76,7 @@ if (!isset($_GET['id'])) {
 
         <div class="form-outline mb-4 mt-4">
             <label for="price">price:</label>
-            <input type="number" name="price" id="price" value="<?php echo $product->product_price;  ?>" class="form-control" step="0.01" placeholder="Description" />
+            <input type="number" name="price" id="price" value="<?php echo $product->product_price;  ?>" class="form-control" step="0.01" placeholder="Price" />
         </div>
         <div class="form-outline mb-4 mt-4">
         <label for="expiration">expiration:</label>
@@ -86,17 +91,19 @@ if (!isset($_GET['id'])) {
         <div class="form-outline mb-4 mt-4">
             <label for="category">category:</label>
             <select name="category" id="category">
-            <?php foreach($categories as $category) : ?>
-                <option value="<?php echo $category->category_id; ?>"><?php echo $category->category_name; ?></option>
-            <?php endforeach;?>
+                <?php foreach ($categories as $categoryItem) : ?>
+                    <option value="<?php echo $categoryItem->category_id; ?>" <?php echo ($categoryItem->category_id == $product->category_id) ? 'selected' : ''; ?>>
+                        <?php echo $categoryItem->category_name; ?>
+                    </option>
+                <?php endforeach; ?>
             </select>
-        </div>
+         </div>
 
         <div class="form-outline mb-4 mt-4">
             <label for="status">Status:</label>
             <select name="status" id="status">
-                <option value="0">Not available</option>
-                <option value="1">available</option>
+                <option value="0" <?php echo ($product->status == 0) ? 'selected' : ''; ?>>Not available</option>
+                <option value="1" <?php echo ($product->status == 1) ? 'selected' : ''; ?>>Available</option>
             </select>
         </div>
 

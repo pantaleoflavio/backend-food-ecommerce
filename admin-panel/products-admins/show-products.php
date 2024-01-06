@@ -11,10 +11,13 @@ include "../classes/category-contr.classes.php";
 include "../classes/product-contr.classes.php";
 $categoryContr = new CategoryContr();
 $productsContr = new ProductContr();
-
 $categories = $categoryContr->getCategories();
 
-
+if (isset($_GET['action']) && $_GET['action'] === 'delete' && isset($_GET['id'])) {
+  $id = $_GET['id'];
+  $deleteProduct = $productsContr->deleteSingleProduct($id);
+  echo "<script>window.location.href='show-products.php'</script>";
+}
 
 
 ?>

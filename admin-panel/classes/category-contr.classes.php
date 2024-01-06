@@ -58,26 +58,35 @@ class CategoryContr extends DB {
     public function deleteSingleCategory($id){
         $stmt = $this->connect()->prepare("DELETE FROM categories WHERE category_id = ?");
 
-        if(!$stmt->execute([$id])){
-            $stmt = null;
-            header("location: ../index.php?error=stmtfailed");
-            exit();
+        try {
+            $stmt->bindParam(1, $id);
+            $stmt->execute();
+    
+            return true; // Successo
+        } catch (PDOException $e) {
+            error_log("PDOException in deleteSingleCategory: " . $e->getMessage());
+            return false;
         }
-
-        $stmt = null;
         
     }
 
     public function createSingleCategory($name, $image, $description, $icon){
         $stmt = $this->connect()->prepare("INSERT INTO categories (category_name, category_image, category_description, category_icon) VALUES (?, ?, ?, ?)");
 
-        if(!$stmt->execute([$name, $image, $description, $icon])){
-            $stmt = null;
-            header("location: ../index.php?error=stmtfailed");
-            exit();
+        try {
+            $stmt->bindParam(1, $name);
+            $stmt->bindParam(2, $image);
+            $stmt->bindParam(3, $description);
+            $stmt->bindParam(4, $icon);
+    
+            $stmt->execute();
+    
+            return true; // Successo
+        } catch (PDOException $e) {
+            error_log("PDOException in createSingleCategory: " . $e->getMessage());
+            return false;
         }
 
-        $stmt = null;
         
     }
 

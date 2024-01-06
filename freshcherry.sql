@@ -1,10 +1,10 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Nov 24, 2023 alle 16:40
--- Versione del server: 10.4.27-MariaDB
+-- Creato il: Gen 06, 2024 alle 18:28
+-- Versione del server: 10.4.32-MariaDB
 -- Versione PHP: 8.1.17
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `freshcery`
+-- Database: `freshcherry`
 --
 
 -- --------------------------------------------------------
@@ -51,11 +51,14 @@ CREATE TABLE `bills` (
 --
 
 INSERT INTO `bills` (`bill_id`, `invoice`, `fullname`, `company`, `city`, `country`, `adresse`, `zip`, `email`, `phone`, `order_notes`, `user_id`, `total`, `product_list`, `created_at`, `delivery`) VALUES
-(17, NULL, 'John Doe', '', 'verona', 'venedig', 'via Vie 2', 0, 'john@doe.com', 0, 'juzkmrfzkltrf,luit,', 1, '558.72', '', '2023-11-14 19:23:34', 0),
-(43, NULL, 'John Doe', '', 'verona', 'venedig', 'via Vie 2', 0, 'john@doe.com', 0, 'test 4', 1, '177.23', 'meat €101.11 x 1<br>Pig €56.12 x 1<br>', '2023-11-19 13:59:44', 0),
-(44, NULL, 'John Doe', '', 'verona', 'v', 'via Vie 2', 0, 'john@doe.com', 0, 'test 5', 1, '171.20', 'Package €5.50 x 2<br>beetroot €20.10 x 2<br>apple €100.00 x 1<br>', '2023-11-19 14:02:20', 0),
-(47, NULL, 'John Doe', '', 'verona', 'venedig', 'via Vie 2', 0, 'john@doe.com', 0, '', 1, '80.30', 'beetroot €20.10 x 3<br>', '2023-11-19 14:06:21', 0),
-(48, 'Q74LISzpbG', 'John Doe', '', 'Chicago', 'India', 'street 10', 11234, 'john@doe.com', 123092938, 'Another test', 1, '372.31', 'apple €100.00 x 2<br>beetroot €20.10 x 2<br>fries €5.50 x 2<br>meat €101.11 x 1<br>', '2023-11-20 14:59:34', 0);
+(17, NULL, 'John Doe', '', 'verona', 'venedig', 'via Vie 2', 0, 'john@doe.com', 0, 'juzkmrfzkltrf,luit,', 1, 558.72, '', '2023-11-14 19:23:34', 0),
+(43, NULL, 'John Doe', '', 'verona', 'venedig', 'via Vie 2', 0, 'john@doe.com', 0, 'test 4', 1, 177.23, 'meat €101.11 x 1<br>Pig €56.12 x 1<br>', '2023-11-19 13:59:44', 0),
+(44, NULL, 'John Doe', '', 'verona', 'v', 'via Vie 2', 0, 'john@doe.com', 0, 'test 5', 1, 171.20, 'Package €5.50 x 2<br>beetroot €20.10 x 2<br>apple €100.00 x 1<br>', '2023-11-19 14:02:20', 0),
+(47, NULL, 'John Doe', '', 'verona', 'venedig', 'via Vie 2', 0, 'john@doe.com', 0, '', 1, 80.30, 'beetroot €20.10 x 3<br>', '2023-11-19 14:06:21', 0),
+(48, 'Q74LISzpbG', 'John Doe', '', 'Chicago', 'India', 'street 10', 11234, 'john@doe.com', 123092938, 'Another test', 1, 372.31, 'apple €100.00 x 2<br>beetroot €20.10 x 2<br>fries €5.50 x 2<br>meat €101.11 x 1<br>', '2023-11-20 14:59:34', 0),
+(49, 'H13YnED98y', 'mary', '', 'verona', 'venedig', 'via Vie 2', 0, 'mary@jane.com', 0, 'test', 3, 80.69, 'salmon €20.23 x 3<br>', '2023-11-26 13:28:21', 0),
+(50, '0Ue4gylt8u', 'mary', '', 'Munich', 'Germania', 'via Vie 2', 11234, 'mary@jane.com', 0, 'test', 3, 80.69, 'salmon €20.23 x 3<br>', '2023-12-05 19:06:43', 0),
+(51, 'NXbgaC2Gzx', 'John Doe', '', 'München', 'Germania', 'via Vie 2', 80000, 'john@doe.com', 1760000000, 'test for path', 1, 116.60, 'beetroot €24.15 x 4<br>', '2023-12-14 17:24:32', 0);
 
 -- --------------------------------------------------------
 
@@ -125,13 +128,13 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`product_id`, `product_title`, `product_description`, `product_image`, `product_price`, `product_quantity`, `exp_date`, `category_id`, `status`, `created_at`) VALUES
-(1, 'apple', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'apple.jpg', '100.00', 3, '2023', 3, 1, '2023-11-07 19:10:37'),
-(2, 'beetroot', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'beetroot.jpg', '20.10', 2, '2023', 1, 1, '2023-11-07 19:10:37'),
-(3, 'salmon', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia des', 'salmon.jpg', '20.23', 3, '2023', 6, 1, '2023-11-07 19:10:37'),
-(4, 'meat', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia des', 'meats.jpg', '101.11', 1, '2023', 2, 1, '2023-11-07 19:10:37'),
-(5, 'fries', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia des', 'frozen.jpg', '5.50', 1, '2023', 4, 1, '2023-11-07 19:10:37'),
-(6, 'Package', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia des', 'frozen.jpg', '5.50', 1, '2023', 5, 1, '2023-11-07 19:10:37'),
-(7, 'Pig', 'Better known as tenderloin, the pork loin comes from a section of the pig between its shoulders and its back legs. Like beef tenderloin, the lomo is the most tender section and the leanest one to boot', 'pig.jpg', '56.12', 6, '2023', 2, 1, '2023-11-08 19:47:12');
+(1, 'apple', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'apple.jpg', 100.15, 4, '2023', 3, 1, '2023-11-07 19:10:37'),
+(2, 'beetroot', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor inci', 'beetroot.jpg', 25.00, 4, '2025', 1, 1, '2023-11-07 19:10:37'),
+(3, 'salmon', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia des', 'salmon.jpg', 20.23, 1, '2023', 6, 1, '2023-11-07 19:10:37'),
+(4, 'meat', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia des', 'meats.jpg', 101.11, 1, '2023', 2, 1, '2023-11-07 19:10:37'),
+(5, 'fries', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia des', 'frozen.jpg', 5.50, 1, '2023', 4, 1, '2023-11-07 19:10:37'),
+(6, 'Package', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia des', 'frozen.jpg', 5.50, 1, '2023', 5, 1, '2023-11-07 19:10:37'),
+(7, 'Pig', 'Better known as tenderloin, the pork loin comes from a section of the pig between its shoulders and its back legs. Like beef tenderloin, the lomo is the most tender section and the leanest one to boot', 'pig.jpg', 56.12, 6, '2023', 2, 1, '2023-11-08 19:47:12');
 
 -- --------------------------------------------------------
 
@@ -146,6 +149,7 @@ CREATE TABLE `users` (
   `username` varchar(200) DEFAULT NULL,
   `user_image` varchar(200) DEFAULT NULL,
   `user_password` varchar(200) DEFAULT NULL,
+  `role` varchar(255) DEFAULT 'customer',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -153,16 +157,19 @@ CREATE TABLE `users` (
 -- Dump dei dati per la tabella `users`
 --
 
-INSERT INTO `users` (`user_id`, `user_fullname`, `user_email`, `username`, `user_image`, `user_password`, `created_at`) VALUES
-(1, 'John Doe', 'john@doe.com', 'johndoe', 'johndoe.jpg', '$2y$10$firdux1h4UKrPg04NlNfYOgxE4Lt9fDo2UVnWd7ywZUeWgUkm5qwG', '2023-11-05 12:46:42'),
-(3, 'Mary Jane', 'mary@jane.com', 'maryjane', 'user.png', '$2y$10$LHfldy4T0erCILXa.6xQcenGEsCm1cRUXVT5JwqT/rldZx8FmonCm', '2023-11-05 12:51:23'),
-(5, 'Tizio Caio', 'tizio@caio.com', 'tiziocaio', 'user.png', '$2y$10$aCqbmM7osKn1Alxa0nhS5.y/rJC/H2jDAwLr0meoQ.9efzhdkC1dS', '2023-11-05 16:28:06'),
-(6, 'User One', 'user@1.it', 'user1', 'user.png', '$2y$10$K8UG.3yeB4QeBi4gc/j16uUuJBDfGAk4CXMOkvr8MLIPF/ylrRt7q', '2023-11-05 16:30:30'),
-(7, 'User Two', 'user@2.it', 'user2', 'user.png', '$2y$10$jtIZoKnB7hqDNFMmdWplb.20TTq/uwmV45lcU8liD/57txQzJmp3a', '2023-11-05 16:31:10'),
-(8, 'Winnie Pooh', 'winnie@pooh.it', 'winnie', 'user.png', '$2y$10$XbV5Okb0hOICa28XQuWZi.SmrZr03XgG6XKv1DI//Mc2jFWdAQRx.', '2023-11-05 16:36:34'),
-(9, 'Mikey Mouse', 'mikey@mouse.it', 'mikey', 'user.png', '$2y$10$suEXV7j7V79xfjO0B/vTduQ58dLwPR7Jk3AtdrVt1vYR1izrma/g2', '2023-11-05 16:38:11'),
-(10, 'Mr Anderson', 'neo@matrix.com', 'neo', 'user.png', '$2y$10$VfmC4dwiqvERsv274B2PZecNK8XniC6FEacGfdXtaYYZidHuN.5MO', '2023-11-05 16:41:21'),
-(11, 'John Cena', 'john@cena.com', 'fu', 'user.png', '$2y$10$oH59Fsmj9JBwKw1yheRt2.GNXbfB2X8RxMdLcZhizU2LOkk7q0bga', '2023-11-05 16:45:04');
+INSERT INTO `users` (`user_id`, `user_fullname`, `user_email`, `username`, `user_image`, `user_password`, `role`, `created_at`) VALUES
+(1, 'John Doe', 'john@doe.com', 'johndoe', 'johndoe.jpg', '$2y$10$firdux1h4UKrPg04NlNfYOgxE4Lt9fDo2UVnWd7ywZUeWgUkm5qwG', 'admin', '2023-11-05 12:46:42'),
+(3, 'Mary Jane', 'mary@jane.com', 'maryjane', 'maryjane.jpg', '$2y$10$LHfldy4T0erCILXa.6xQcenGEsCm1cRUXVT5JwqT/rldZx8FmonCm', 'customer', '2023-11-05 12:51:23'),
+(5, 'Tizio Caio', 'tizio@caio.com', 'tiziocaio', 'user.png', '$2y$10$aCqbmM7osKn1Alxa0nhS5.y/rJC/H2jDAwLr0meoQ.9efzhdkC1dS', 'customer', '2023-11-05 16:28:06'),
+(6, 'User One', 'user@1.it', 'user1', 'user.png', '$2y$10$K8UG.3yeB4QeBi4gc/j16uUuJBDfGAk4CXMOkvr8MLIPF/ylrRt7q', 'customer', '2023-11-05 16:30:30'),
+(7, 'User Two', 'user@2.it', 'user2', 'user.png', '$2y$10$jtIZoKnB7hqDNFMmdWplb.20TTq/uwmV45lcU8liD/57txQzJmp3a', 'customer', '2023-11-05 16:31:10'),
+(8, 'Winnie Pooh', 'winnie@pooh.it', 'winnie', 'user.png', '$2y$10$XbV5Okb0hOICa28XQuWZi.SmrZr03XgG6XKv1DI//Mc2jFWdAQRx.', 'customer', '2023-11-05 16:36:34'),
+(9, 'Mikey Mouse', 'mikey@mouse.it', 'mikey', 'user.png', '$2y$10$suEXV7j7V79xfjO0B/vTduQ58dLwPR7Jk3AtdrVt1vYR1izrma/g2', 'customer', '2023-11-05 16:38:11'),
+(10, 'Mr Anderson', 'neo@matrix.com', 'neo', 'user.png', '$2y$10$VfmC4dwiqvERsv274B2PZecNK8XniC6FEacGfdXtaYYZidHuN.5MO', 'customer', '2023-11-05 16:41:21'),
+(11, 'John Cena', 'john@cena.com', 'fu', 'user.png', '$2y$10$oH59Fsmj9JBwKw1yheRt2.GNXbfB2X8RxMdLcZhizU2LOkk7q0bga', 'customer', '2023-11-05 16:45:04'),
+(12, 'Gianni Vernia', 'gianni@vernia.it', 'giannivernia', 'user.png', '$2y$10$mHykHhh8Wxjdj1Y5Ehd1.e9RxLA3mSpvS38KSjhevoxRz.Nh26U/6', 'customer', '2023-11-26 18:36:19'),
+(14, 'Bruce Wayne', 'bat@man.com', 'batman', 'user.png', '$2y$10$uCtmW70kcYFe8XNMiJI/L.4MkRtpQpCHf4aUlXLL6O/3RBF0iaH/K', 'customer', '2023-11-27 16:35:10'),
+(15, 'Peter Parker', 'spider@man.com', 'spideyboia', 'spider.jpg', '$2y$10$firdux1h4UKrPg04NlNfYOgxE4Lt9fDo2UVnWd7ywZUeWgUkm5qwG', 'customer', '2023-12-22 08:07:53');
 
 --
 -- Indici per le tabelle scaricate
@@ -208,31 +215,31 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT per la tabella `bills`
 --
 ALTER TABLE `bills`
-  MODIFY `bill_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `bill_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT per la tabella `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT per la tabella `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT per la tabella `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT per la tabella `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
