@@ -17,11 +17,12 @@ This project represents a food e-commerce store implemented in PHP and SQL using
 
 1. Clone this repository into the `c/xampp/htdocs` directory.
 2. Ensure that XAMPP is installed and start the Apache and MySQL servers.
-3. Open the browser and go to the `localhost` page.
-4. Log in as a user using the following credentials:
+3. Open the browser and go to the `localhost/freshcherry` page.
+4. Use the comand line `git checkout php-oop`, then refresh the `localhost/freshcherry` page.
+5. Log in as a user using the following credentials:
    - Email: john@doe.com
    - Password: password.
-5. To test the payment service, go to the [PayPal Developers](https://developer.paypal.com/) page and follow the instructions to create a sandbox. Use the sandbox data to make a payment.
+6. To test the payment service, go to the [PayPal Developers](https://developer.paypal.com/) page and follow the instructions to create a sandbox. Use the sandbox data to make a payment.
 
 ## Branches
 
