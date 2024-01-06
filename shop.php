@@ -61,39 +61,41 @@
                     <h2 class="title">Most Wanted</h2>
                     <div class="product-carousel owl-carousel">
                         <?php foreach($allMostProducts as $allMostProduct) : ?>
-                        <div class="item">
-                            <div class="card card-product">
-                                <div class="card-ribbon">
-                                    <div class="card-ribbon-container right">
-                                        <span class="ribbon ribbon-primary">SPECIAL</span>
-                                    </div>
-                                </div>
-                                <div class="card-badge">
-                                    <div class="card-badge-container left">
-                                        <span class="badge badge-default">
-                                            Until <?php echo $allMostProduct->exp_date; ?>
-                                        </span>
-                                        <span class="badge badge-primary">
-                                            20% OFF
-                                        </span>
-                                    </div>
-                                    <img src="assets/img/<?php echo $allMostProduct->product_image; ?>" alt="Card image 2" class="card-img-top">
-                                </div>
-                                <div class="card-body">
-                                    <h4 class="card-title">
-                                        <a href="products/detail-product.php?id=<?php echo $allMostProduct->product_id; ?>"><?php echo $allMostProduct->product_title; ?></a>
-                                    </h4>
-                                    <div class="card-price">
-                                        <span class="reguler">€ <?php echo $allMostProduct->product_price; ?></span>
-                                        <span class="discount">€ 200.000</span>
-                                    </div>
-                                    <a href="products/detail-product.php?id=<?php echo $allMostProduct->product_id; ?>" class="btn btn-block btn-primary">
-                                        Add to Cart
-                                    </a>
+                            <?php if ($allMostProduct->status === 1) : ?>
+                                <div class="item">
+                                    <div class="card card-product">
+                                        <div class="card-ribbon">
+                                            <div class="card-ribbon-container right">
+                                                <span class="ribbon ribbon-primary">SPECIAL</span>
+                                            </div>
+                                        </div>
+                                        <div class="card-badge">
+                                            <div class="card-badge-container left">
+                                                <span class="badge badge-default">
+                                                    Until <?php echo $allMostProduct->exp_date; ?>
+                                                </span>
+                                                <span class="badge badge-primary">
+                                                    20% OFF
+                                                </span>
+                                            </div>
+                                            <img src="assets/img/<?php echo $allMostProduct->product_image; ?>" alt="Card image 2" class="card-img-top">
+                                        </div>
+                                        <div class="card-body">
+                                            <h4 class="card-title">
+                                                <a href="products/detail-product.php?id=<?php echo $allMostProduct->product_id; ?>"><?php echo $allMostProduct->product_title; ?></a>
+                                            </h4>
+                                            <div class="card-price">
+                                                <span class="reguler">€ <?php echo $allMostProduct->product_price; ?></span>
+                                                <span class="discount">€ 200.000</span>
+                                            </div>
+                                            <a href="products/detail-product.php?id=<?php echo $allMostProduct->product_id; ?>" class="btn btn-block btn-primary">
+                                                Add to Cart
+                                            </a>
 
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
+                        <?php endif;?>
                         <?php endforeach;?>
                     </div>
                 </div>
@@ -103,14 +105,11 @@
 
 
     <section id="vegetables" class="gray-bg">
-
         <?php foreach($allCategories as $category) : ?>
         <?php
-
             // STATEMENT FOR TO HAVE EVERY SINGLE SECTION FOR EVERY SINGLE CATEGORY
             $cat_id = $category->category_id;
             $products = $productControll->getProductsByCategory($cat_id);
-
         ?>
             <div class="container">
                 <div class="row">
@@ -118,39 +117,41 @@
                         <h2 class="title"><?php echo $category->category_name; ?></h2>
                         <div class="product-carousel owl-carousel">
                             <?php foreach($products as $product) : ?>
-                            <div class="item">
-                                <div class="card card-product">
-                                    <div class="card-ribbon">
-                                        <div class="card-ribbon-container right">
-                                            <span class="ribbon ribbon-primary">SPECIAL</span>
-                                        </div>
-                                    </div>
-                                    <div class="card-badge">
-                                        <div class="card-badge-container left">
-                                            <span class="badge badge-default">
-                                                Until <?php echo $product->exp_date; ?>
-                                            </span>
-                                            <span class="badge badge-primary">
-                                                20% OFF
-                                            </span>
-                                        </div>
-                                        <img src="assets/img/<?php echo $product->product_image; ?>" alt="Card image 2" class="card-img-top">
-                                    </div>
-                                    <div class="card-body">
-                                        <h4 class="card-title">
-                                            <a href="products/detail-product.php?id=<?php echo $product->product_id; ?>"><?php echo $product->product_title; ?></a>
-                                        </h4>
-                                        <div class="card-price">
-                                            <span class="reguler">€ <?php echo $product->product_price; ?></span>
-                                            <span class="discount">€ 200.000</span>
-                                        </div>
-                                        <a href="products/detail-product.php?id=<?php echo $product->product_id; ?>" class="btn btn-block btn-primary">
-                                            Add to Cart
-                                        </a>
+                                <?php if ($product->status === 1) : ?>
+                                    <div class="item">
+                                        <div class="card card-product">
+                                            <div class="card-ribbon">
+                                                <div class="card-ribbon-container right">
+                                                    <span class="ribbon ribbon-primary">SPECIAL</span>
+                                                </div>
+                                            </div>
+                                            <div class="card-badge">
+                                                <div class="card-badge-container left">
+                                                    <span class="badge badge-default">
+                                                        Until <?php echo $product->exp_date; ?>
+                                                    </span>
+                                                    <span class="badge badge-primary">
+                                                        20% OFF
+                                                    </span>
+                                                </div>
+                                                <img src="assets/img/<?php echo $product->product_image; ?>" alt="Card image 2" class="card-img-top">
+                                            </div>
+                                            <div class="card-body">
+                                                <h4 class="card-title">
+                                                    <a href="products/detail-product.php?id=<?php echo $product->product_id; ?>"><?php echo $product->product_title; ?></a>
+                                                </h4>
+                                                <div class="card-price">
+                                                    <span class="reguler">€ <?php echo $product->product_price; ?></span>
+                                                    <span class="discount">€ 200.000</span>
+                                                </div>
+                                                <a href="products/detail-product.php?id=<?php echo $product->product_id; ?>" class="btn btn-block btn-primary">
+                                                    Add to Cart
+                                                </a>
 
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
+                                <?php endif; ?>
                             <!-- END FOREACH OF THE PRODUCT GROUPS -->
                             <?php endforeach; ?>
                         </div>
