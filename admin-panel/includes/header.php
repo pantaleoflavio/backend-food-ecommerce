@@ -1,6 +1,7 @@
 <?php 
     session_start();
-    define("ADMINURL", $_COOKIE['appleader']."/admin-panel");
+    define('ROOT', "http://" . $_SERVER['SERVER_NAME'] . "/freshcherry");
+    define("ADMINURL", ROOT."/admin-panel");
     
 ?>
 

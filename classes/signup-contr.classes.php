@@ -19,29 +19,30 @@ class SignupContr extends Signup {
     }
 
     public function signupUser() {
-      if ($this->emptyInput() == false) {
-        // echo "Empty Input";
-        header("location: ../index.php?error=emptyinput");
-        exit();
-      }
+        $errors = array();
 
-      if ($this->invalidEmail() == false) {
-        // echo "Email is not valid";
-        header("location: ../index.php?error=invalidemail");
-        exit();
-      }
-
-      if ($this->passwordMatch() == false) {
-        // echo "Password doesnt match";
-        header("location: ../index.php?error=passwordmatch");
-        exit();
-      }
-
-      if ($this->usernameTakenCheck() == false) {
-        // echo "Username or Email exists";
-        header("location: ../index.php?error=useroremailexists");
-        exit();
-      }
+        if ($this->emptyInput() == false) {
+            $errors[] = "Empty input";
+        }
+    
+        if ($this->invalidEmail() == false) {
+            $errors[] = "Invalid email";
+        }
+    
+        if ($this->passwordMatch() == false) {
+            $errors[] = "Passwords don't match";
+        }
+    
+        if ($this->usernameTakenCheck() == false) {
+            $errors[] = "Username or email already exists";
+        }
+    
+        if (!empty($errors)) {
+            // Ci sono errori, reindirizza con gli errori come parametro
+            $errorString = implode(", ", $errors);
+            header("location: ../auth/register.php?error=" . urlencode($errorString));
+            exit();
+        }
 
       $this->setUser($this->fullname, $this->email, $this->username, $this->user_image, $this->password);
     }

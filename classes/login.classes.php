@@ -21,8 +21,9 @@
 
             if($checkPass == false) {
                 $stmt = null;
-                header("location: ../index.php?error=passwordmatch");
+                header("location: ../auth/login.php?error=Username or email are wrong");
                 exit();
+
             } elseif ($checkPass == true) {
                 $stmt = $this->connect()->prepare("SELECT * FROM users WHERE user_email = ? OR username =?");
 

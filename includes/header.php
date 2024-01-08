@@ -1,13 +1,14 @@
 <?php 
     session_start();
 
-    //$GLOBALS['appleader'] = "http://" . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+    // Definisci la costante per la root del sito
+    define('ROOT', "http://" . $_SERVER['SERVER_NAME'] . "/freshcherry");
 
-    if (!isset($_COOKIE['appleader'])) {
-        $cookieValue = "http://" . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
-        setcookie("appleader", "", time() - 1, "/");
-        setcookie("appleader", $cookieValue, time() + 43200, "/");
-    }
+    //if (!isset($_COOKIE['appleader'])) {
+    //    $cookieValue = "http://" . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+    //    setcookie("appleader", "", time() - 1, "/");
+    //    setcookie("appleader", $cookieValue, time() + 43200, "/");
+    //}
 
 
 ?>
@@ -15,6 +16,18 @@
 <?php require_once __DIR__ . '/../config/config.php'; ?>
 
 <?php
+
+    if (isset($_GET['error'])) {
+        $errorString = urldecode($_GET['error']);
+        $errors = explode(", ", $errorString);
+
+        echo "<script>";
+        foreach ($errors as $error) {
+            echo "alert('$error');";
+        }
+        echo "</script>";
+    }
+
     //Update number of products on screen
     if (isset($_SESSION['user_id'])) {
         $id = $_SESSION['user_id'];
@@ -39,16 +52,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
-    <link href="<?php echo $_COOKIE['appleader']; ?>/assets/fonts/sb-bistro/sb-bistro.css" rel="stylesheet" type="text/css">
-    <link href="<?php echo $_COOKIE['appleader']; ?>/assets/fonts/font-awesome/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo ROOT; ?>/assets/fonts/sb-bistro/sb-bistro.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo ROOT; ?>/assets/fonts/font-awesome/font-awesome.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" type="text/css" media="all" href="<?php echo $_COOKIE['appleader']; ?>/assets/packages/bootstrap/bootstrap.css">
-    <link rel="stylesheet" type="text/css" media="all" href="<?php echo $_COOKIE['appleader']; ?>/assets/packages/o2system-ui/o2system-ui.css">
-    <link rel="stylesheet" type="text/css" media="all" href="<?php echo $_COOKIE['appleader']; ?>/assets/packages/owl-carousel/owl-carousel.css">
-    <link rel="stylesheet" type="text/css" media="all" href="<?php echo $_COOKIE['appleader']; ?>/assets/packages/cloudzoom/cloudzoom.css">
-    <link rel="stylesheet" type="text/css" media="all" href="<?php echo $_COOKIE['appleader']; ?>/assets/packages/thumbelina/thumbelina.css">
-    <link rel="stylesheet" type="text/css" media="all" href="<?php echo $_COOKIE['appleader']; ?>/assets/packages/bootstrap-touchspin/bootstrap-touchspin.css">
-    <link rel="stylesheet" type="text/css" media="all" href="<?php echo $_COOKIE['appleader']; ?>/assets/css/theme.css">
+    <link rel="stylesheet" type="text/css" media="all" href="<?php echo ROOT; ?>/assets/packages/bootstrap/bootstrap.css">
+    <link rel="stylesheet" type="text/css" media="all" href="<?php echo ROOT; ?>/assets/packages/o2system-ui/o2system-ui.css">
+    <link rel="stylesheet" type="text/css" media="all" href="<?php echo ROOT; ?>/assets/packages/owl-carousel/owl-carousel.css">
+    <link rel="stylesheet" type="text/css" media="all" href="<?php echo ROOT; ?>/assets/packages/cloudzoom/cloudzoom.css">
+    <link rel="stylesheet" type="text/css" media="all" href="<?php echo ROOT; ?>/assets/packages/thumbelina/thumbelina.css">
+    <link rel="stylesheet" type="text/css" media="all" href="<?php echo ROOT; ?>/assets/packages/bootstrap-touchspin/bootstrap-touchspin.css">
+    <link rel="stylesheet" type="text/css" media="all" href="<?php echo ROOT; ?>/assets/css/theme.css">
 
 </head>
 <body>
@@ -57,8 +70,8 @@
         <nav class="navbar fixed-top navbar-expand-md navbar-dark bg-transparent" id="page-navigation">
             <div class="container">
                 <!-- Navbar Brand -->
-                <a href="<?php echo $_COOKIE['appleader']; ?>/index.php" class="navbar-brand">
-                    <img src="<?php echo $_COOKIE['appleader']; ?>/assets/img/logo/logo.png" alt="">
+                <a href="<?php echo ROOT; ?>/index.php" class="navbar-brand">
+                    <img src="<?php echo ROOT; ?>/assets/img/logo/logo.png" alt="">
                 </a>
 
                 <!-- Toggle Button -->
@@ -76,25 +89,25 @@
                         <!-- Session validation with if condition -->
                         <?php if(!isset($_SESSION['username'])) : ?>
                         <li class="nav-item">
-                            <a href="<?php echo $_COOKIE['appleader']; ?>/auth/register.php" class="nav-link">Register</a>
+                            <a href="<?php echo ROOT; ?>/auth/register.php" class="nav-link">Register</a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?php echo $_COOKIE['appleader']; ?>/auth/login.php" class="nav-link">Login</a>
+                            <a href="<?php echo ROOT; ?>/auth/login.php" class="nav-link">Login</a>
                         </li>
 
                         <!-- Session validation else condition -->
                         <?php else : ?>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <div class="avatar-header"><img src="<?php echo $_COOKIE['appleader'];?>/assets/img/users/<?php echo $userData['user_image']; ?>"></div> <?php echo $_SESSION['username']; ?>
+                                <div class="avatar-header"><img src="<?php echo ROOT;?>/assets/img/users/<?php echo $userData['user_image']; ?>"></div> <?php echo $_SESSION['username']; ?>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="<?php echo $_COOKIE['appleader']; ?>/users/transaction.php?id=<?php echo $_SESSION['user_id']; ?>">Transactions History</a>
-                                <a class="dropdown-item" href="<?php echo $_COOKIE['appleader']; ?>/users/setting.php?id=<?php echo $_SESSION['user_id']; ?>">Settings</a>
+                                <a class="dropdown-item" href="<?php echo ROOT; ?>/users/transaction.php?id=<?php echo $_SESSION['user_id']; ?>">Transactions History</a>
+                                <a class="dropdown-item" href="<?php echo ROOT; ?>/users/setting.php?id=<?php echo $_SESSION['user_id']; ?>">Settings</a>
                                 <?php if($_SESSION['role'] === 'admin') : ?>
-                                <a class="dropdown-item" href="<?php echo $_COOKIE['appleader']; ?>/admin-panel/index.php?id=<?php echo $_SESSION['user_id']; ?>">Admin Panel</a>
+                                <a class="dropdown-item" href="<?php echo ROOT; ?>/admin-panel/index.php?id=<?php echo $_SESSION['user_id']; ?>">Admin Panel</a>
                                 <?php endif; ?>
-                                <a class="dropdown-item" href="<?php echo $_COOKIE['appleader'];?>/auth/logout.php">log out</a>
+                                <a class="dropdown-item" href="<?php echo ROOT;?>/auth/logout.php">log out</a>
                             </div>
                         </li>
                         
@@ -115,7 +128,7 @@
                                         <div class="shopping-cart-list">
                                             <?php foreach($cartProducts as $cartProduct) : ?>
                                                 <div class="media">
-                                                    <img class="d-flex mr-3" src="<?php echo $_COOKIE['appleader']; ?>/assets/img/<?php echo $cartProduct->pro_image; ?>" width="60">
+                                                    <img class="d-flex mr-3" src="<?php echo ROOT; ?>/assets/img/<?php echo $cartProduct->pro_image; ?>" width="60">
                                                     <div class="media-body">
                                                         <h5><a href="<?php echo $_COOKIE['appleader'] ?>/products/detail-product.php?id=<?php echo $cartProduct->pro_id; ?>"><?php echo $cartProduct->pro_title; ?></a></h5>
                                                         <p class="price">
@@ -149,8 +162,8 @@
                                     <!-- END if condition CART EMPTY -->
                                     <?php endif; ?>
                                     <li class="d-flex justify-content-between pl-3 pr-3 pt-3">
-                                        <a href="<?php echo $_COOKIE['appleader']; ?>/products/cart.php" class="btn btn-default">View Cart</a>
-                                        <a href="<?php echo $_COOKIE['appleader']; ?>/checkout.php" class="btn btn-primary">Checkout</a>
+                                        <a href="<?php echo ROOT; ?>/products/cart.php" class="btn btn-default">View Cart</a>
+                                        <a href="<?php echo ROOT; ?>/checkout.php" class="btn btn-primary">Checkout</a>
                                     </li>
                                 </ul>
                             </div>
