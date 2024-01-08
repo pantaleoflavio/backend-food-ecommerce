@@ -88,6 +88,20 @@ class CartContr extends DB {
             return false;
         }
     }
+
+    public function deleteCart ($user_id){
+        $stmt = $this->connect()->prepare("DELETE FROM cart WHERE user_id=?");
+        try {
+            $stmt->bindParam(1, $user_id);
+            $stmt->execute();
+            unset($_SESSION['total_bill']);
+            return true; // Successo
+
+        } catch (PDOException $e) {
+            error_log("PDOException in deleteCart: " . $e->getMessage());
+            return false;
+        }
+    }
     
 }
 

@@ -40,6 +40,12 @@ class UserContr extends DB {
 
 
     // ALL USERS METHODS
+    public function getAllUsers() {
+        $stmt = $this->connect()->prepare("SELECT * FROM users");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
     public function getUsers($role) {
         $stmt = $this->connect()->prepare("SELECT * FROM users WHERE role = ?");
         $stmt->execute([$role]);

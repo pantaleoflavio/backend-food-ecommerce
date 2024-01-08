@@ -3,10 +3,9 @@
 <?php
 
 if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $_GET['id']) {
-    $user = $_SESSION['user_id'];
-    $bill = $conn->query("SELECT * FROM bills WHERE user_id = '{$user}'");
-    $bill->execute();
-    $billDetails = $bill->fetchAll(PDO::FETCH_OBJ);
+    $userId = $_SESSION['user_id'];
+
+    $billDetails = $billController->showAllBillsProUser($userId);
 } else {
     echo "<script>window.location.href='../404.php'</script>";
 }
@@ -50,7 +49,7 @@ if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $_GET['id']) {
                                     <?php foreach($billDetails as $billDetail) : ?>
                                     <tr>
                                         <td>
-                                            <?php echo $stringRandom = generateStringRandom() . "&id=" . $billDetail->bill_id; ?>
+                                            <?php echo $billDetail->invoice . "&id=" . $billDetail->bill_id; ?>
                                         </td>
                                         <td>
                                             <?php echo $billDetail->created_at; ?>

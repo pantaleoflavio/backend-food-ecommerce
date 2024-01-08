@@ -9,10 +9,7 @@ if (!isset($_GET['id'])) {
   header("Location: ../index.php");
 } else {
   $category_id = $_GET['id'];
-  //Instantiate Class
-  include "../../classes/db.classes.php";
-  include "../classes/category-contr.classes.php";
-  $categoryContr = new CategoryContr();
+
   $category = $categoryContr->getSingleCategory($category_id);
 
   if (isset($_POST['submit'])) {

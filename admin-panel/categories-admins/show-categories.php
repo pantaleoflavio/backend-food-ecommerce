@@ -5,11 +5,6 @@ if($_SESSION['role'] !== 'admin') {
   header("Location: ../../index.php");
 }
 
-
-//Instantiate Classes
-include "../../classes/db.classes.php";
-include "../classes/category-contr.classes.php";
-$categoryContr = new CategoryContr();
 $categories = $categoryContr->getCategories();
 
 if (isset($_GET['action']) && $_GET['action'] === 'delete' && isset($_GET['id'])) {

@@ -5,14 +5,7 @@ if($_SESSION['role'] !== 'admin') {
   header("Location: ../../index.php");
 }
 
-  //Instantiate Class
-  include "../../classes/db.classes.php";
-  include "../classes/product-contr.classes.php";
-  $productContr = new ProductContr();
-
-  include "../classes/category-contr.classes.php";
-  $categoriesContr = new CategoryContr();
-  $categories = $categoriesContr->getCategories();
+  $categories = $categoryContr->getCategories();
   
   if (isset($_POST['create'])) {
     $product_title = $_POST['productTitle'];

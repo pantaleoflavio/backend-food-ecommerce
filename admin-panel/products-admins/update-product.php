@@ -9,17 +9,10 @@ if (!isset($_GET['id'])) {
     header("Location: ../index.php");
 } else {
     $product_id = $_GET['id'];
-    //Instantiate Product
-    include "../../classes/db.classes.php";
-    include "../classes/product-contr.classes.php";
-    $productContr = new ProductContr();
+
     $product = $productContr->getSingleProduct($product_id);
 
-    //Instantiate Categories
-
-    include "../classes/category-contr.classes.php";
-    $categoriesContr = new CategoryContr();
-    $categories = $categoriesContr->getCategories();
+    $categories = $categoryContr->getCategories();
 
     if (isset($_POST['submit'])) {
         $product_title = $_POST['name'];
@@ -80,7 +73,7 @@ if (!isset($_GET['id'])) {
         </div>
         <div class="form-outline mb-4 mt-4">
         <label for="expiration">expiration:</label>
-            <input type="number" name="expiration" id="expiration" min="<?php echo $product->exp_date; ?>" max="2025" value="<?php echo $product->exp_date; ?>" class="form-control" placeholder="Description" />
+            <input type="number" name="expiration" id="expiration" min="<?php echo $product->exp_date; ?>" max="2028" value="<?php echo $product->exp_date; ?>" class="form-control" placeholder="Description" />
         </div>
 
         <div class="form-outline mb-4 mt-4">

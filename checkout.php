@@ -13,12 +13,13 @@ if (isset($_SESSION['user_id'])) {
     $mySubTot = floatval(array_sum($cartSubtot));
 
     if(isset($_POST['submit'])) {
-        $stringRandom = generateStringRandom();
+
+        $invoice = $billController->generateInvoiceRandom();
         $customer = $_POST['fullname'];
         $company = $_POST['company'];
-        $adresse = $_POST['adresse'];
         $city = $_POST['city'];
         $country = $_POST['country'];
+        $adresse = $_POST['adresse'];
         $zip = $_POST['zip'];
         $email = $_POST['email'];
         $phone = $_POST['phone'];
@@ -30,27 +31,8 @@ if (isset($_SESSION['user_id'])) {
         foreach ($cartProducts as $cartProduct) {
             $product_list .= $cartProduct->pro_title . " €" . $cartProduct->pro_price . " x " . $cartProduct->pro_qty . "<br>";
         };
-        
 
-        $insert = $conn->prepare("INSERT INTO bills(invoice, fullname, company, city, country, adresse, zip,email,
-        phone, order_notes, user_id, total, product_list) VALUES (:invoice, :fullname, :company, :city, :country, :adresse, :zip,
-        :email, :phone, :order_notes, :user_id, :total, :product_list)");
-
-        $insert->execute([
-            ":invoice" => $stringRandom,
-            ":fullname" => $customer,
-            ":company" => $company,
-            ":city" => $city,
-            ":country" => $country,
-            ":adresse" => $adresse,
-            ":zip" => $zip,
-            ":email" => $email,
-            ":phone" => $phone,
-            ":order_notes" => $order_notes,
-            ":user_id" => $user_id,
-            ":total" => $mySubTot + 20,
-            ":product_list" => $product_list
-        ]);
+        $newBill = $billController->createBill($invoice, $customer, $company, $city, $country, $adresse, $zip, $email, $phone, $order_notes, $user_id, $mySubTot + 20, $product_list); 
 
         // Update total as Session key
         if (!isset($_SESSION['total_bill'])) {

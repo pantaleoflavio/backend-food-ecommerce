@@ -3,17 +3,8 @@
 if($_SESSION['role'] !== 'admin') {
   header("Location: ../../index.php");
 }
-
-
-//Instantiate SignupContr Class
-
-include "../../classes/db.classes.php";
-include "../classes/user-contr.classes.php";
-$usersContr = new UserContr();
 $users = $usersContr->getUsers('customer');
 $admins = $usersContr->getUsers('admin');
-
-
 
 if (isset($_GET['user_id'])) {
   $user_id = $_GET['user_id'];
@@ -26,8 +17,6 @@ if (isset($_GET['admin_id'])) {
   $setUser = $usersContr->setRoleUser($admin_id);
   header("Location: ". ADMINURL . "/admins/admins.php");
 }
-
-
 
 
 ?>

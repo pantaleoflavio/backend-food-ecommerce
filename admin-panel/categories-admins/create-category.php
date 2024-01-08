@@ -4,13 +4,6 @@ if($_SESSION['role'] !== 'admin') {
   header("Location: ../../index.php");
 }
 
-  //Instantiate Class
-  include "../../classes/db.classes.php";
-  include "../classes/category-contr.classes.php";
-  $categoryContr = new CategoryContr();
-  
-
-
   if (isset($_POST['create'])) {
     $cat_name = $_POST['name'];
     $cat_description = $_POST['description'];

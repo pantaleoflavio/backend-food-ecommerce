@@ -1,5 +1,16 @@
 <?php require_once '../includes/header.php'; ?>
+<?php
+if($_SESSION['role'] !== 'admin') {
+  header("Location: ../../index.php");
+}
 
+// INIT BILL CLASS
+
+$bills = $billController->showAllBills();
+
+
+
+?>
     <div class="row">
         <div class="col">
           <div class="card">
@@ -9,58 +20,42 @@
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">first name</th>
-                    <th scope="col">last name</th>
-                    <th scope="col">email</th>
-                    <th scope="col">country</th>
-                    <th scope="col">status</th>
-                    <th scope="col">price in USD</th>
+                    <th>Id</th>
+                    <th>Invoice</th>
+                    <th>Customer Data</th>
+                    <th>Adresse</th>
+                    <th>Total</th>
+                    <th>order notes</th>
+                    <th>Status</th>
                     <th scope="col">date</th>
                     <th scope="col">update</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Mark</td>
-                    <td>Otto@email.com</td>
-                    <td>USA</td>
-                    <td>sent to admins</td>
-                    <td>10</td>
-                    <td>12-12-2022</td>
-                    <td>                
-                        <a href="#" class="btn btn-warning text-white mb-4 text-center">update</a>
-                    </td>
-                   
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Jacob</td>
-                    <td>Otto@email.com</td>
-                    <td>USA</td>
-                    <td>sent to admins</td>
-                    <td>10</td>
-                    <td>12-12-2022</td>
-                    <td>                
-                        <a href="#" class="btn btn-warning text-white mb-4 text-center">update</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>Larry</td>
-                    <td>Otto@email.com</td>
-                    <td>USA</td>
-                    <td>sent to admins</td>
-                    <td>10</td>
-                    <td>12-12-2022</td>
-                    <td>                
-                        <a href="#" class="btn btn-warning text-white mb-4 text-center">update</a>
-                    </td>
-                  </tr>
+                <?php if(count($bills) > 0) : ?>
+                  <?php foreach($bills as $bill) : ?>
+                    <tr>
+                      <th scope="row">1</th>
+                      <td><?php echo $bill->bill_id; ?></td>
+                      <td><?php echo $bill->invoice; ?></td>
+                      <td><?php echo $bill->fullname . '<br>' . $bill->phone . '<br>' . $bill->email . '<br>' . $bill->country; ?></td>
+                      <td><?php echo $bill->address. '<br>' . $bill->zip . '<br>' . $bill->city . '<br>' . $bill->country; ?></td>
+                      <td><?php echo $bill->total; ?></td>
+                      <?php if ($bill->delivery == 0) : ?>
+                        <td class="bg-danger"> in processing </td>
+                      <?php else : ?>
+                        <td class="bg-success"> delivered </td>
+                        <?php endif; ?>
+                      <td><?php echo $bill->order_notes; ?></td>
+                      <td><?php echo $bill->created_at; ?></td>
+                      <td>                
+                          <a href="#" class="btn btn-warning text-white mb-4 text-center">update</a>
+                      </td>
+                    
+                    </tr>
+                  <?php endforeach; ?>
                 </tbody>
+                <?php endif; ?>
               </table> 
             </div>
           </div>

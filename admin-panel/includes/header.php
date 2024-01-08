@@ -15,8 +15,19 @@ if($_SESSION['role'] !== 'admin') {
   header("Location: ../index.php");
 }
 
+// INCLUDE THE CLASSES AND CONTROLLERS
+include __DIR__ . "/../../classes/db.classes.php";
+include __DIR__ . "/../classes/user-contr.classes.php";
+include __DIR__ . "/../classes/category-contr.classes.php";
+include __DIR__ . "/../classes/bill-contr.classes.php";
+include __DIR__ . "/../classes/product-contr.classes.php";
 
+// INIT CONTROLLERS
 
+$billController = new BillController();
+$usersContr = new UserContr();
+$categoryContr = new CategoryContr();
+$productContr = new ProductContr();
 ?>
 
 
