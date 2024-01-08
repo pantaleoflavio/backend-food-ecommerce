@@ -30,14 +30,16 @@
 
     //Update number of products on screen
     if (isset($_SESSION['user_id'])) {
+        include __DIR__ . "/../classes/db.classes.php";
+        include __DIR__ . "/../admin-panel/classes/user-contr.classes.php";
+        include __DIR__ . "/../classes/cart-contr.classes.php";
         $id = $_SESSION['user_id'];
-        $query = $conn->prepare("SELECT * FROM cart WHERE user_id = {$id}");
-        $query->execute();
-        $cartProducts = $query->fetchAll(PDO::FETCH_OBJ);
 
-        $user = $conn->query("SELECT * FROM users WHERE user_id = '$id'");
-        $user->execute();
-        $userData = $user->fetch(PDO::FETCH_ASSOC);
+        $cartController = new CartContr();
+        $cartProducts = $cartController->getCartProUser($id);
+
+        $userController = new UserContr();
+        $user = $userController->getSingleUser($id);
 
     }
 
@@ -99,7 +101,7 @@
                         <?php else : ?>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <div class="avatar-header"><img src="<?php echo ROOT;?>/assets/img/users/<?php echo $userData['user_image']; ?>"></div> <?php echo $_SESSION['username']; ?>
+                                <div class="avatar-header"><img src="<?php echo ROOT;?>/assets/img/users/<?php echo $user->user_pic; ?>"></div> <?php echo $_SESSION['username']; ?>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="<?php echo ROOT; ?>/users/transaction.php?id=<?php echo $_SESSION['user_id']; ?>">Transactions History</a>

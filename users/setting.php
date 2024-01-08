@@ -3,13 +3,6 @@
 
 <?php
 if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $_GET['id']) {
-    include "../classes/db.classes.php";
-    //include "../admin-panel/classes/user.classes.php";
-    include "../admin-panel/classes/user-contr.classes.php";
-    $id = $_SESSION['user_id'];
-
-    $userController = new UserContr();
-    $user = $userController->getSingleUser($id);
 
     if (isset($_POST['submit'])) {
 

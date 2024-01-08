@@ -2,7 +2,7 @@
 
 <?php
     //Include of the classes
-    include "classes/db.classes.php";
+
     include "admin-panel/classes/category-contr.classes.php";
     include "admin-panel/classes/product-contr.classes.php";
     
