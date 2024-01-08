@@ -22,8 +22,9 @@ $bills = $billController->showAllBills();
                     <th>Invoice</th>
                     <th>Customer Data</th>
                     <th>Adresse</th>
-                    <th>Total</th>
+                    <th>Total in €</th>
                     <th>order notes</th>
+                    <th>Product list</th>
                     <th>Status</th>
                     <th scope="col">date</th>
                     <th scope="col">update</th>
@@ -39,12 +40,13 @@ $bills = $billController->showAllBills();
                       <td><?php echo $bill->fullname . '<br>' . $bill->phone . '<br>' . $bill->email; ?></td>
                       <td><?php echo $bill->adresse. '<br>' . $bill->zip . '<br>' . $bill->city . '<br>' . $bill->country; ?></td>
                       <td><?php echo $bill->total; ?></td>
+                      <td><?php echo $bill->order_notes; ?></td>
+                      <td><?php echo $bill->product_list; ?></td>
                       <?php if ($bill->delivery == 0) : ?>
                         <td class="bg-danger"> in processing </td>
                       <?php else : ?>
                         <td class="bg-success"> delivered </td>
                         <?php endif; ?>
-                      <td><?php echo $bill->order_notes; ?></td>
                       <td><?php echo $bill->created_at; ?></td>
                       <td>                
                           <a href="#" class="btn btn-warning text-white mb-4 text-center">update</a>
