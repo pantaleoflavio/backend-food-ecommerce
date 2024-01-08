@@ -5,9 +5,7 @@ if($_SESSION['role'] !== 'admin') {
 }
 
 // INIT BILL CLASS
-
 $bills = $billController->showAllBills();
-
 
 
 ?>
@@ -38,8 +36,8 @@ $bills = $billController->showAllBills();
                       <th scope="row">1</th>
                       <td><?php echo $bill->bill_id; ?></td>
                       <td><?php echo $bill->invoice; ?></td>
-                      <td><?php echo $bill->fullname . '<br>' . $bill->phone . '<br>' . $bill->email . '<br>' . $bill->country; ?></td>
-                      <td><?php echo $bill->address. '<br>' . $bill->zip . '<br>' . $bill->city . '<br>' . $bill->country; ?></td>
+                      <td><?php echo $bill->fullname . '<br>' . $bill->phone . '<br>' . $bill->email; ?></td>
+                      <td><?php echo $bill->adresse. '<br>' . $bill->zip . '<br>' . $bill->city . '<br>' . $bill->country; ?></td>
                       <td><?php echo $bill->total; ?></td>
                       <?php if ($bill->delivery == 0) : ?>
                         <td class="bg-danger"> in processing </td>
