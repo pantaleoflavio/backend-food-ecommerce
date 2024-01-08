@@ -12,10 +12,6 @@ if (isset($_SESSION['user_id'])) {
 
     $totalCart = array_sum($cartSubtot);
 
-    $cart = $conn->query("SELECT * FROM cart WHERE user_id = {$_SESSION['user_id']}");
-    $cart->execute();
-    $cartProducts = $cart->fetchAll(PDO::FETCH_OBJ);
-    
 } else {
     echo "<script>window.location.href='../index.php'</script>";
 }
@@ -57,6 +53,12 @@ if (isset($_SESSION['user_id'])) {
                                 
                                 <?php if(count($cartProducts) > 0) : ?>
                                     <?php foreach($cartProducts as $cartProduct) : ?>
+                                    <?php
+                                        $product = $productControll->getSingleProduct($cartProduct->pro_id);
+                                        $productQty = $product->product_quantity;
+                                    
+                                    ?>
+                                    
                                         <tr>
                                             <td>
                                                 <img src="../assets/img/<?php echo $cartProduct->pro_image; ?>" width="60">
@@ -68,7 +70,7 @@ if (isset($_SESSION['user_id'])) {
                                                 <input disabled class="pro_price" type="number" name="pro_price" value="<?php echo $cartProduct->pro_price; ?>"> €
                                             </td>
                                             <td>
-                                                <input class="pro_qty form-control" type="number" min="1" data-bts-button-down-class="btn btn-primary" data-bts-button-up-class="btn btn-primary" value="<?php echo $cartProduct->pro_qty; ?>" name="vertical-spin">
+                                                <input class="pro_qty form-control" type="number" min="1" max="<?php echo $productQty; ?>" data-bts-button-down-class="btn btn-primary" data-bts-button-up-class="btn btn-primary" value="<?php echo $cartProduct->pro_qty; ?>" name="vertical-spin">
                                             </td>
                                             <td>
                                                 <button value="<?php echo $cartProduct->cart_id; ?>" class="btn btn-primary btn-update">UPDATE</button>

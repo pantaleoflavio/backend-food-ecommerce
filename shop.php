@@ -1,14 +1,6 @@
 <?php require_once "includes/header.php"; ?>
 
 <?php
-    //Include of the classes
-
-    include "admin-panel/classes/category-contr.classes.php";
-    include "admin-panel/classes/product-contr.classes.php";
-    
-    // Instantiate all classes controller
-    $categoryControll = new CategoryContr();
-    $productControll = new ProductContr();
 
     // Instantiate Categorie class
     $allCategories = $categoryControll->getCategories();

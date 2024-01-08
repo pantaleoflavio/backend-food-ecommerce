@@ -13,7 +13,7 @@ class CartContr extends DB {
         } else {
             
             $cart = $stmt->fetchAll((PDO::FETCH_OBJ));
-            // $cart = new Cart($cartDB[0]['cart_id'], $cartDB[0]['product_id'], $cartDB[0]['product_title'], $cartDB[0]['product_image'], $cartDB[0]['product_price'], $cartDB[0]['product_qty'], $cartDB[0]['user_id']);
+            
         }
 
         return $cart;
@@ -21,6 +21,73 @@ class CartContr extends DB {
         
     }
 
+    public function validateCart($product_id, $user_id){
+        $stmt = $this->connect()->prepare("SELECT * FROM cart WHERE pro_id = ? AND user_id = ?");
+        
+        if(!$stmt->execute([$product_id, $user_id])){
+            $validate = null;
+        }
+
+        $row_count = $stmt->rowCount();
+        
+        if($row_count > 0) {
+            
+           $validate = true;
+        } else {
+            $validate = false;
+        }
+
+        return $validate;
+    }
+
+    public function createCart($pro_id, $pro_title, $pro_image, $pro_price, $pro_qty, $user_id){
+        $stmt = $this->connect()->prepare("INSERT INTO cart (pro_id, pro_title, pro_image, pro_price, pro_qty, user_id) VALUES (?, ?, ?, ?, ?, ?)");
+
+        try {
+            $stmt->bindParam(1, $pro_id);
+            $stmt->bindParam(2, $pro_title);
+            $stmt->bindParam(3, $pro_image);
+            $stmt->bindParam(4, $pro_price);
+            $stmt->bindParam(5, $pro_qty);
+            $stmt->bindParam(6, $user_id);
+    
+            $stmt->execute();
+    
+            return true; // Successo
+        } catch (PDOException $e) {
+            error_log("PDOException in createCart: " . $e->getMessage());
+            return false;
+        }
+        
+    }
+
+    public function updateQtyProductCart ($pro_qty, $cart_id){
+        $stmt = $this->connect()->prepare("UPDATE cart SET pro_qty = ? WHERE cart_id = ?");
+        try {
+            $stmt->bindParam(1, $pro_qty);
+            $stmt->bindParam(2, $cart_id);
+            $stmt->execute();
+    
+            return true; // Successo
+
+        } catch (PDOException $e) {
+            error_log("PDOException in updateQtyProductCart: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function deleteProductFromCart ($cart_id){
+        $stmt = $this->connect()->prepare("DELETE FROM cart WHERE cart_id = ?");
+        try {
+            $stmt->bindParam(1, $cart_id);
+            $stmt->execute();
+            return true; // Successo
+
+        } catch (PDOException $e) {
+            error_log("PDOException in deleteProductCart: " . $e->getMessage());
+            return false;
+        }
+    }
     
 }
 

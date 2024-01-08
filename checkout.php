@@ -2,9 +2,6 @@
 <?php
 
 if (isset($_SESSION['user_id'])) {
-    $cart = $conn->query("SELECT * FROM cart WHERE user_id = {$_SESSION['user_id']}");
-    $cart->execute();
-    $cartProducts = $cart->fetchAll(PDO::FETCH_OBJ);
 
     // Subtot and TOT plus Update total as Session key
     $cartSubtot = array();

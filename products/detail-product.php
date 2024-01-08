@@ -1,48 +1,35 @@
 <?php require_once "../includes/header.php"; ?>
 <?php
 
-// QUERY for to insert in cart table the customners products 
-if (isset($_POST['submit'])) {
-    $pro_id = $_POST['pro_id'];
-    $pro_title = $_POST['pro_title'];
-    $pro_image = $_POST['pro_image'];
-    $pro_price = $_POST['pro_price'];
-    $pro_qty = $_POST['pro_qty'];
-    $user_id = $_POST['user_id'];
 
-    $insert = $conn->prepare("INSERT INTO cart (pro_id, pro_title, pro_image, pro_price, pro_qty, user_id)
-    VALUE (:pro_id, :pro_title, :pro_image, :pro_price, :pro_qty, :user_id)");
-
-    $insert->execute([
-        ':pro_id' => $pro_id,
-        ':pro_title' => $pro_title,
-        ':pro_image' => $pro_image,
-        ':pro_price' => $pro_price,
-        ':pro_qty' => $pro_qty,
-        ':user_id' => $user_id,
-    ]);
-
-} else {
-    # code...
-}
 
 
 if(isset($_GET['id'])) {
     $id = $_GET['id'];
-    $select = $conn->query("SELECT * FROM products WHERE status = 1 AND product_id = {$id}");
-    $select->execute();
-    if ($select->rowCount() > 0) {
-        $product = $select->fetch(PDO::FETCH_OBJ);
+
+    $cartContr = new CartContr();
+    $productContr = new ProductContr();
+    $product = $productContr->getSingleProduct($id);
+
+    if ($product) {
 
         // Related Products fetch
-        $relatedProducts = $conn->query("SELECT * FROM products WHERE status = 1 AND category_id = {$product->category_id} AND product_id != {$id}");
-        $relatedProducts->execute();
-        $allRelatedProducts = $relatedProducts->fetchAll(PDO::FETCH_OBJ);
+        $allRelatedProducts = $productContr->getProductsByCategory($product->category_id);
 
         //validating cart products
         if (isset($_SESSION['user_id'])) {
-            $validate = $conn->query("SELECT * FROM cart WHERE pro_id = {$id} AND user_id = {$_SESSION['user_id']}");
-            $validate->execute();
+            $validate = $cartContr->validateCart($id, $_SESSION['user_id']);
+        }
+
+        if (isset($_POST['submit'])) {
+            $pro_id = $_POST['pro_id'];
+            $pro_title = $_POST['pro_title'];
+            $pro_image = $_POST['pro_image'];
+            $pro_price = $_POST['pro_price'];
+            $pro_qty = $_POST['pro_qty'];
+            $user_id = $_POST['user_id'];
+        
+            $newCart = $cartContr->createCart($pro_id, $pro_title, $pro_image, $pro_price, $pro_qty, $user_id);
         }
 
     } else {
@@ -141,7 +128,7 @@ if(isset($_GET['id'])) {
                                 </div>
                                 <div class="col-sm-6"><span class="pt-1 d-inline-block">Pack (1000 gram)</span></div>
                             </div>
-                            <?php if($validate->rowCount() > 0) : ?>
+                            <?php if($validate == true) : ?>
                             <button id="add-to-cart" name="submit" type="submit" disabled class="mt-3 btn btn-primary btn-lg">
                                 <i class="fa fa-shopping-basket"></i> Added to Cart
                             </button>
@@ -182,7 +169,7 @@ if(isset($_GET['id'])) {
                                             20% OFF
                                         </span>
                                     </div>
-                                    <img src="<?php echo APPURL ?>/assets/img/<?php echo $allRelatedProduct->product_image; ?>" alt="Card image 2" class="card-img-top">
+                                    <img src="<?php echo ROOT; ?>/assets/img/<?php echo $allRelatedProduct->product_image; ?>" alt="Card image 2" class="card-img-top">
                                 </div>
                                 <div class="card-body">
                                     <h4 class="card-title">
@@ -192,7 +179,7 @@ if(isset($_GET['id'])) {
                                         <span class="discount">€ <?php echo $allRelatedProduct->product_price; ?></span>
 
                                     </div>
-                                    <a href="<?php echo APPURL ?>/products/detail-product.php?id=<?php echo $allRelatedProduct->product_id; ?>" class="btn btn-block btn-primary">
+                                    <a href="<?php echo ROOT; ?>/products/detail-product.php?id=<?php echo $allRelatedProduct->product_id; ?>" class="btn btn-block btn-primary">
                                         Add to Cart
                                     </a>
 
