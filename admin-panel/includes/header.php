@@ -47,7 +47,7 @@ $productContr = new ProductContr();
 <div id="wrapper">
     <nav class="navbar header-top fixed-top navbar-expand-lg  navbar-dark bg-dark">
       <div class="container">
-      <a class="navbar-brand" href="<?php echo $_COOKIE['appleader']; ?>">To the E-Commerce</a>
+      <a class="navbar-brand" href="<?php echo ROOT; ?>">To the E-Commerce</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText"
         aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

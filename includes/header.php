@@ -95,7 +95,7 @@
                     <!-- Navbar Menu -->
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a href="<?php echo $_COOKIE['appleader']; ?>/shop.php" class="nav-link">Shop</a>
+                            <a href="<?php echo ROOT; ?>/shop.php" class="nav-link">Shop</a>
                         </li>
 
                         <!-- Session validation with if condition -->

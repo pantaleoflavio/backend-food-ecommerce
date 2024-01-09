@@ -18,7 +18,7 @@ class BillController extends DB {
     }
 
     public function showAllBillsProUser($userId){
-        $stmt = $this->connect()->prepare("SELECT * FROM bills WHERE user_id = ?");
+        $stmt = $this->connect()->prepare("SELECT * FROM bills WHERE user_id = ? ORDER BY created_at DESC");
 
         if(!$stmt->execute([$userId])){
             $stmt = null;
@@ -67,6 +67,17 @@ class BillController extends DB {
         // Estrai una sottostringa random della lunghezza desiderata
         $stringRandom = substr($mixedCharacters, 0, 10);
         return $stringRandom;
+    }
+
+    public function setDeliveryStatus($id, $delivery) {
+        $stmt = $this->connect()->prepare("UPDATE bills SET delivery = ? WHERE bill_id = ?");
+        if ($delivery == 0) {
+            $stmt->execute([$delivery = 1, $id]);
+            $stmt = null;
+        } elseif ($delivery == 1){
+            $stmt->execute([$delivery = 0, $id]);
+            $stmt = null;
+        }
     }
 
     
