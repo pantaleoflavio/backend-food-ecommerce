@@ -28,8 +28,7 @@
         echo "</script>";
     }
 
-    //Update number of products on screen
-    if (isset($_SESSION['user_id'])) {
+
 
         // INCLUDE DB AND CONTROLLER CLASSES
         include __DIR__ . "/../classes/db.classes.php";
@@ -38,7 +37,7 @@
         include __DIR__ . "/../admin-panel/classes/category-contr.classes.php";
         include __DIR__ . "/../admin-panel/classes/bill-contr.classes.php";
         include __DIR__ . "/../classes/cart-contr.classes.php";
-        $id = $_SESSION['user_id'];
+        
 
         // INIT CONTROLLERS
         $cartController = new CartContr();
@@ -47,6 +46,9 @@
         $categoryControll = new CategoryContr();
         $billController = new BillController();
 
+    //Update number of products on screen
+    if (isset($_SESSION['user_id'])) {
+        $id = $_SESSION['user_id'];
         $cartProducts = $cartController->getCartProUser($id);
         $user = $userController->getSingleUser($id);
 

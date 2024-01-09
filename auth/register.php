@@ -14,7 +14,7 @@ if(isset($_SESSION['username'])) {
         $confirm_password = $_POST['confirm_password'];
 
         //Instantiate SignupContr Class
-        include "../classes/db.classes.php";
+
         include "../classes/signup.classes.php";
         include "../classes/signup-contr.classes.php";
         $signup = new SignupContr($user_fullname, $user_email, $username, $user_image, $user_password, $confirm_password);

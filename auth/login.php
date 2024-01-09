@@ -1,5 +1,5 @@
 <?php require_once "../includes/header.php"; ?>
-<?php require_once "../config/config.php"; ?>
+
 <?php 
 if(isset($_SESSION['username'])) {
     echo "<script>window.location.href='../index.php'</script>";
@@ -10,7 +10,7 @@ if(isset($_SESSION['username'])) {
         $input_password = $_POST['password'];
 
         //Instantiate Login Contr Class
-        include "../classes/db.classes.php";
+
         include "../classes/login.classes.php";
         include "../classes/login-contr.classes.php";
         $login = new LoginContr($input_email, $input_password);
