@@ -142,7 +142,7 @@
                                                 <div class="media">
                                                     <img class="d-flex mr-3" src="<?php echo ROOT; ?>/assets/img/<?php echo $cartProduct->pro_image; ?>" width="60">
                                                     <div class="media-body">
-                                                        <h5><a href="<?php echo $_COOKIE['appleader'] ?>/products/detail-product.php?id=<?php echo $cartProduct->pro_id; ?>"><?php echo $cartProduct->pro_title; ?></a></h5>
+                                                        <h5><a href="<?php echo ROOT; ?>/products/detail-product.php?id=<?php echo $cartProduct->pro_id; ?>"><?php echo $cartProduct->pro_title; ?></a></h5>
                                                         <p class="price">
                                                             <span>€ <?php echo $cartProduct->pro_price; ?></span>
                                                         </p>

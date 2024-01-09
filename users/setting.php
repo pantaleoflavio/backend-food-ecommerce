@@ -20,11 +20,11 @@ if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $_GET['id']) {
         
         $userUpdate = $userController->updateSingleUser($id, $fullname, $email, $username, $user_pic);
 
-        echo "<script>window.location.href='" . $_COOKIE['appleader'] . "/users/setting.php?id=".$_SESSION['user_id']."'</script>";
+        echo "<script>window.location.href='" . ROOT . "/users/setting.php?id=".$_SESSION['user_id']."'</script>";
     }
 
 } else {
-    echo "<script>window.location.href='" . $_COOKIE['appleader'] . "'</script>";
+    echo "<script>window.location.href='" . ROOT . "'</script>";
 }
 
 

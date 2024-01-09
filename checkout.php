@@ -3,6 +3,7 @@
 
 if (isset($_SESSION['user_id'])) {
 
+    $user = $userController->getSingleUser($_SESSION['user_id']);
     // Subtot and TOT plus Update total as Session key
     $cartSubtot = array();
     foreach ($cartProducts as $cartProduct) {
@@ -70,7 +71,7 @@ if (isset($_SESSION['user_id'])) {
                             <!-- Bill Detail of the User -->
                             <fieldset>
                                 <div class="form-group">
-                                    <input name="fullname" class="form-control" placeholder="Name" type="text" required>
+                                    <input name="fullname" value="<?php echo $user->fullname; ?>" class="form-control" placeholder="Name" type="text" required>
                                 </div>
                                 <div class="form-group">
                                     <input name="company" class="form-control" placeholder="Company Name" type="text">
@@ -89,7 +90,7 @@ if (isset($_SESSION['user_id'])) {
                                 </div>
                                 <div class="form-group row">
                                     <div class="col">
-                                        <input name="email" class="form-control" placeholder="Email Address" type="email" required>
+                                        <input name="email" value="<?php echo $user->email; ?>" class="form-control" placeholder="Email Address" type="email" required>
                                     </div>
                                     <div class="col">
                                         <input name="phone" class="form-control" placeholder="Phone Number" type="tel" required>
