@@ -2,7 +2,6 @@
     session_start();
     define('ROOT', "http://" . $_SERVER['SERVER_NAME'] . "/freshcherry");
     define("ADMINURL", ROOT."/admin-panel");
-    
 ?>
 
 <?php 
@@ -81,7 +80,7 @@ $productContr = new ProductContr();
               <?php echo $_SESSION['username']; ?>
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="../../auth/logout.php">Logout</a>
+              <a class="dropdown-item" href="<?php echo ADMINURL; ?>/../auth/logout.php">Logout</a>
           </li>
         </ul> 
       </div>
