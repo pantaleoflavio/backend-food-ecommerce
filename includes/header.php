@@ -12,8 +12,7 @@
 
 
 ?>
-<?php require_once "functions.php";?>
-<?php require_once __DIR__ . '/../config/config.php'; ?>
+
 
 <?php
 

@@ -1,10 +1,6 @@
 <?php require_once "includes/header.php"; ?>
-<?php require_once "config/config.php";?>
 <?php
-    $categories = $conn->query("SELECT * FROM categories");
-    $categories->execute();
-
-    $allCategories = $categories->fetchAll(PDO::FETCH_OBJ);
+    $categories = $categoryControll->getCategories();
 ?>
 
     <div id="page-content" class="page-content">
@@ -151,7 +147,7 @@
             <h2 class="title">Categories</h2>
             <div class="landing-categories owl-carousel">
                 <!-- LOOP FOR EACH FOOD CATEGORY -->
-                <?php foreach($allCategories as $category) : ?>
+                <?php foreach($categories as $category) : ?>
                 <div class="item">
                     <div class="card rounded-0 border-0 text-center">
                         <img src="assets/img/<?php echo $category->category_image; ?>">
